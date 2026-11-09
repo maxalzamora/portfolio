@@ -1,0 +1,13 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Local tooling
+node_modules/
+.env
+.env.*
+
+# Logs
+*.log

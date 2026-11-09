@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Max Alzamora — Junior Backend Developer in Barcelona. Python, Django, SQL and clean, tested backend systems.">
+    <meta name="keywords" content="Max Alzamora, Junior Backend Developer, Python, Django, SQL, Barcelona, Portfolio">
+    <meta name="author" content="Max Alzamora">
+    <meta name="theme-color" content="#0a0b0d">
+    <meta name="color-scheme" content="dark">
+    <meta property="og:title" content="Max Alzamora | Junior Backend Developer">
+    <meta property="og:description" content="Python, Django, SQL and clean, tested backend systems. Based in Barcelona and open to junior backend roles.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maxalzamora.github.io/portfolio/">
+    <meta property="og:image" content="https://maxalzamora.github.io/portfolio/src/assets/projects/portfolio.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://maxalzamora.github.io/portfolio/">
+    <title>Max Alzamora | Junior Backend Developer</title>
+    <link rel="icon" href="src/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+
+<body class="loading">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Glitch Interference Overlay -->
+    <div id="glitchOverlay" class="glitch-overlay"></div>
+
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="./" class="nav-logo" id="navLogo" aria-label="Home"></a>
+            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu" id="navMenu" role="menubar"></ul>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <section class="hero" id="hero">
+            <div class="hero-grid" id="heroGrid"></div>
+            <div class="scroll-indicator" aria-hidden="true">
+                <span></span>
+            </div>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="container" id="aboutContainer"></div>
+        </section>
+
+        <section class="section" id="skills" aria-labelledby="skills-title">
+            <div class="container" id="skillsContainer"></div>
+        </section>
+
+        <section class="section" id="projects" aria-labelledby="projects-title">
+            <div class="container" id="projectsContainer"></div>
+        </section>
+
+        <section class="section" id="contact" aria-labelledby="contact-title">
+            <div class="container" id="contactContainer"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container" id="footerContainer"></div>
+    </footer>
+
+    <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <!-- Image Lightbox -->
+    <div id="imageLightbox" class="lightbox" role="dialog" aria-label="Image preview" aria-hidden="true">
+        <div class="lightbox-backdrop"></div>
+        <button class="lightbox-close" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="">
+            <span class="lightbox-caption"></span>
+        </div>
+    </div>
+
+    <noscript>
+        <style>
+            body.loading { overflow: auto; }
+            .anim-stagger { opacity: 1; visibility: visible; }
+            .noscript { max-width: 760px; margin: 6rem auto 2rem; padding: 2rem; border: 1px solid #21262d; border-radius: 8px; font-family: sans-serif; color: #e8ebee; }
+            .noscript a { color: #2dd484; }
+        </style>
+        <div class="noscript">
+            <h1>Max Alzamora</h1>
+            <p>Junior Backend Developer based in Barcelona. I build Django applications, design relational data models and write tests that keep things honest.</p>
+            <p>This portfolio needs JavaScript for the full experience. You can still reach me on
+                <a href="https://github.com/maxalzamora">GitHub</a> or by
+                <a href="mailto:37882827+maxalzamora@users.noreply.github.com">email</a>.
+            </p>
+        </div>
+    </noscript>
+
+    <script src="src/data/content.js"></script>
+    <script src="src/scripts/main.js"></script>
+</body>
+
+</html>
