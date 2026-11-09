@@ -8,16 +8,17 @@ build step — so it can be hosted directly on GitHub Pages.
 
 ## What is inside
 
-- Hero with animated typing and a terminal-style status bar
-- About section with an animated terminal
-- Skills grouped by category
-- Project cards with screenshots, links and optional live GitHub stats
-- Contact form and contact links
-- Dark terminal aesthetic, glitch effects, scroll progress and a lightbox
-- Fully responsive, with a mobile navigation drawer
+- An editorial hero with a profile card, availability status and quick facts
+- About section with principles and a "currently learning" panel
+- Skills grouped into readable rows
+- Alternating project rows with screenshots, tech tags and links
+- A dark contact panel with a form and direct contact links
+- Light and dark themes, saved in `localStorage`
+- Responsive navigation, subtle scroll reveals and reduced-motion support
+- No Contribution & Research section
 
-The **Contribution & Research** section from the original design has been
-intentionally left out.
+The design is original to this portfolio: warm paper tones, teal accents,
+Fraunces display type and a content-first layout.
 
 ## Edit the site
 
@@ -29,17 +30,17 @@ src/data/content.js
 
 Open it and change the object at the top of the file. You can edit:
 
-- the page title, description and keywords
-- your name, logo, location and availability
-- the hero greeting, roles, description and buttons
-- the about paragraphs and terminal animation lines
+- the page title, description, keywords, canonical URL and social preview image
+- your name, initials, role, location and availability
+- the navigation links
+- the hero eyebrow, headline, description, buttons, facts and profile card
+- the about paragraphs, principles and "currently" panel
 - skill categories and tags
 - project categories, projects, screenshots, links and tech tags
-- contact links and the contact form
-- the footer text
-- the theme-toggle easter-egg messages
+- contact copy, links and the contact form
+- footer text and theme labels
 
-Text fields accept normal HTML, so you can use `<strong>bold</strong>` or
+Paragraph fields accept normal HTML, so you can use `<strong>bold</strong>` or
 `<code>inline code</code>` where it helps.
 
 ### Add a project
@@ -49,27 +50,35 @@ Copy an object inside `projects.categories[].projects` and edit it:
 ```js
 {
   name: "My New Project",
+  type: "Django application",
+  year: "2026",
   description: "What it does and what you learned.",
   image: "src/assets/projects/my-project.webp",
   imageAlt: "My New Project screenshot",
   repo: "https://github.com/maxalzamora/my-project",
   live: "",
   private: false,
-  featured: true,
   showStats: false,
   statsRepo: "maxalzamora/my-project",
   tech: ["Python", "Django", "SQLite"]
 }
 ```
 
-Leave `live` empty to hide the Live Demo button. Set `showStats` to `true` if
-you want the card to fetch live star and fork counts from GitHub.
+Leave `live` empty to hide the live-site link. Set `showStats` to `true` if you
+want the project to fetch live star and fork counts from GitHub.
 
 ### Add or replace images
 
 Put images in `src/assets/` or `src/assets/projects/` and point the matching
-`image` field at them. WebP or PNG both work. The project cards use a 16:9 crop,
-so screenshots at roughly 1200 × 675 look best.
+`image` field at them. WebP or PNG both work. Project images use a 16:10 crop,
+so screenshots at roughly 1200 × 750 look best.
+
+### Change the theme
+
+The light palette is in `:root` at the top of `src/styles/main.css`. The dark
+palette is in the `[data-theme="dark"]` block directly below it. Both use the
+same token names, so changing `--accent` in each block is usually enough to
+retheme the site.
 
 ## Preview locally
 
@@ -96,7 +105,7 @@ The form has two modes:
 ```js
 form: {
   action: "https://formspree.io/f/your-id",
-  submitLabel: "Send Message"
+  submitLabel: "Send message"
 }
 ```
 
@@ -144,9 +153,9 @@ without Jekyll processing.
     ├── data/
     │   └── content.js          # ← edit this for content changes
     ├── scripts/
-    │   └── main.js             # Rendering and interactions
+    │   └── main.js             # Rendering, theme, navigation and form
     ├── styles/
-    │   └── main.css            # Design tokens, layout and animations
+    │   └── main.css            # Design tokens, layout and responsive styles
     └── assets/
         ├── favicon.svg
         ├── profile.webp
@@ -159,6 +168,4 @@ without Jekyll processing.
 - The email address in `content.js` is a GitHub noreply address. Replace it with
   your real contact email before sharing the site widely.
 - To add LinkedIn, uncomment the example in `contact.links` and add your URL.
-- The original visual direction was inspired by
-  [KrAsH-CoD3/krash-cod3.github.io](https://github.com/KrAsH-CoD3/krash-cod3.github.io).
-  The content, projects and copy here are specific to Max Alzamora.
+- The contact form and project images work without any third-party services.

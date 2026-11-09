@@ -4,7 +4,7 @@
    This is the only file you need to edit for day-to-day changes.
 
    Tips:
-   • Text fields accept normal HTML, so <strong>bold</strong> works.
+   • Paragraph fields accept normal HTML, so <strong>bold</strong> works.
    • Add a project by copying an object inside `projects.categories[].projects`.
    • Add a skill by adding a string to `skills.categories[].items`.
    • Leave a link as "" to hide that button.
@@ -14,18 +14,21 @@
 
 window.PORTFOLIO = {
   meta: {
-    title: "Max Alzamora | Junior Backend Developer",
+    title: "Max Alzamora — Junior Backend Developer",
     description:
-      "Max Alzamora — Junior Backend Developer in Barcelona. Python, Django, SQL and clean, tested backend systems.",
+      "Max Alzamora is a junior backend developer in Barcelona. Python, Django, SQL and clean, tested systems.",
     keywords:
       "Max Alzamora, Junior Backend Developer, Python, Django, SQL, Barcelona, Portfolio",
     author: "Max Alzamora",
-    themeColor: "#0a0b0d"
+    themeColor: "#f4f1e8",
+    url: "https://maxalzamora.github.io/portfolio/",
+    ogImage: "https://maxalzamora.github.io/portfolio/src/assets/projects/portfolio.webp"
   },
 
   identity: {
     name: "Max Alzamora",
-    logo: "<MA/>",
+    initials: "MA",
+    role: "Junior Backend Developer",
     location: "Barcelona, Spain",
     availability: "Open to junior backend roles"
   },
@@ -38,57 +41,64 @@ window.PORTFOLIO = {
   ],
 
   hero: {
-    greeting: ">> Hello world, I'm",
-    name: "Max Alzamora",
-    roles: [
-      "Junior Backend Developer",
-      "Python & Django",
-      "SQL & data modelling",
-      "Testing what I ship"
-    ],
+    eyebrow: "Junior Backend Developer · Barcelona",
+    titleBefore: "I build the ",
+    titleEmphasis: "quiet parts",
+    titleAfter: " of the web.",
     description:
-      "I build server-rendered Django applications, design relational data models and write tests that keep things honest. Looking for my first backend role.",
-    buttons: [
-      { label: "View Projects", href: "#projects", style: "primary" },
-      { label: "Contact Me", href: "#contact", style: "secondary" }
-    ],
+      "I turn fuzzy requirements into clear data models, predictable endpoints and pages that load fast. Currently looking for my first backend role.",
+    primaryCta: { label: "Explore my work", href: "#projects" },
+    secondaryCta: { label: "Get in touch", href: "#contact" },
     image: "src/assets/profile.webp",
-    imageAlt: "Max Alzamora — Junior Backend Developer",
-    status: {
-      prompt: "STATUS",
-      value: "OPEN TO WORK"
+    imageAlt: "Max Alzamora, junior backend developer",
+    status: "Open to work",
+    facts: [
+      { label: "Based in", value: "Barcelona, Spain" },
+      { label: "Focus", value: "Python · Django · SQL" },
+      { label: "Learning", value: "Docker · APIs · CI/CD" }
+    ],
+    profile: {
+      name: "Max Alzamora",
+      role: "Junior Backend Developer",
+      note: "I like small, well-tested systems that are easy to understand six months later.",
+      stack: ["Python", "Django", "MySQL", "pytest"],
+      availability: "Available for junior roles"
     }
   },
 
   about: {
-    title: "About Me",
+    kicker: "01 — About",
+    title: "Curious about the parts behind the screen.",
     paragraphs: [
       "I'm a backend developer based in <strong>Barcelona</strong>, focused on Python and Django. I enjoy turning fuzzy requirements into clear data models, predictable endpoints and pages that load fast.",
       "My main project is <strong>SongTrove</strong>, a private chord-sheet library built with Django, MySQL and server-rendered templates. It covers authentication, per-user data, CRUD, search, a ChordPro parser, on-the-fly transposition and a print view. The test suite runs in CI on every push.",
       "Right now I'm deepening my knowledge of <strong>SQL, testing, Docker and API design</strong>. I care about readable code, small commits and shipping things that work end to end."
     ],
-    terminalTitle: "songtrove.sh",
-    terminalLines: [
-      { type: "command", text: "python manage.py check" },
-      { type: "output", text: "System check identified no issues (0 silenced)." },
-      { type: "command", text: "pytest --cov=songs --cov=accounts" },
-      { type: "output", text: "........................................................ [100%]" },
-      { type: "output", text: "98% coverage — 112 passed in 4.21s" },
-      { type: "command", text: "python manage.py makemigrations --check --dry-run" },
-      { type: "output", text: "No changes detected" },
-      { type: "command", text: "python manage.py seed_songs --user max" },
-      { type: "output", text: "Seeded 8 public-domain songs." },
-      { type: "command", text: "curl -s localhost:8000/healthz" },
-      { type: "output", text: "ok" },
-      { type: "command", text: "git log --oneline -3" },
-      { type: "output", text: "a1b2c3d feat: full-width full view" },
-      { type: "output", text: "d4e5f6a test: close the gaps in the test suite" },
-      { type: "output", text: "9f8e7d6 docs: add a README with screenshots" }
-    ]
+    principles: [
+      {
+        title: "Readable first",
+        text: "Code is read more often than it is written. I optimise for the next person who has to change it."
+      },
+      {
+        title: "Test the edges",
+        text: "Happy paths are easy. I care about permissions, empty states and the awkward cases in between."
+      },
+      {
+        title: "Ship small",
+        text: "Small commits, clear migrations and a working deploy beat a perfect branch that never lands."
+      }
+    ],
+    now: {
+      title: "Currently",
+      text: "Going deeper into SQL, testing and the bits between the code and the server.",
+      items: ["Docker", "PostgreSQL", "REST API design", "CI/CD"]
+    }
   },
 
   skills: {
-    title: "Skills",
+    kicker: "02 — Skills",
+    title: "Tools I reach for.",
+    note: "A practical stack, built through projects rather than tutorials.",
     categories: [
       {
         title: "Languages",
@@ -112,7 +122,7 @@ window.PORTFOLIO = {
         items: ["MySQL", "SQLite", "Relational modelling", "Queries & indexes"]
       },
       {
-        title: "Testing & Tooling",
+        title: "Testing & tooling",
         items: [
           "pytest",
           "pytest-django",
@@ -132,20 +142,24 @@ window.PORTFOLIO = {
         ]
       },
       {
-        title: "Currently Learning",
+        title: "Currently learning",
         items: ["Docker", "PostgreSQL", "REST API design", "CI/CD"]
       }
     ]
   },
 
   projects: {
-    title: "Projects",
+    kicker: "03 — Projects",
+    title: "Selected work.",
+    note: "Three projects that show how I think, build and test.",
     categories: [
       {
-        title: "Backend & Full-Stack",
+        title: "Backend & full-stack",
         projects: [
           {
             name: "SongTrove",
+            type: "Django application",
+            year: "2026",
             description:
               "A private chord-sheet library for the songs you actually play. Built with Django and MySQL, it handles sign-up and login, per-user libraries, CRUD, search and filters, ChordPro and plain-text imports, on-the-fly transposition, capo arithmetic and a clean print view. The test suite covers the parser, views and permissions, runs at 98% coverage, and is checked in CI on every push.",
             image: "src/assets/projects/songtrove.webp",
@@ -153,7 +167,6 @@ window.PORTFOLIO = {
             repo: "https://github.com/maxalzamora/songtrove",
             live: "",
             private: false,
-            featured: true,
             showStats: false,
             statsRepo: "maxalzamora/songtrove",
             tech: [
@@ -167,14 +180,15 @@ window.PORTFOLIO = {
           },
           {
             name: "Portfolio",
+            type: "Static site",
+            year: "2026",
             description:
-              "This site. A static portfolio built with vanilla HTML, CSS and JavaScript, with every piece of content in a single editable data file. No framework, no build step, and it deploys straight to GitHub Pages.",
+              "This site. A content-first portfolio built with vanilla HTML, CSS and JavaScript. Every section is rendered from one editable data file, there is no framework or build step, and it deploys straight to GitHub Pages.",
             image: "src/assets/projects/portfolio.webp",
             imageAlt: "Max Alzamora — portfolio website",
             repo: "https://github.com/maxalzamora/portfolio",
             live: "https://maxalzamora.github.io/portfolio/",
             private: false,
-            featured: true,
             showStats: false,
             statsRepo: "maxalzamora/portfolio",
             tech: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"]
@@ -186,6 +200,8 @@ window.PORTFOLIO = {
         projects: [
           {
             name: "Six Count",
+            type: "Installable PWA",
+            year: "2026",
             description:
               "A small boxing round timer that calls punch combinations out loud while you train. Three 3-minute rounds, voice cues in English and Catalan, a synthesized bell, fullscreen, wake lock and offline support. Installable as a PWA with no dependencies or build step.",
             image: "src/assets/projects/six-count.webp",
@@ -193,7 +209,6 @@ window.PORTFOLIO = {
             repo: "https://github.com/maxalzamora/boxingapp",
             live: "",
             private: false,
-            featured: true,
             showStats: false,
             statsRepo: "maxalzamora/boxingapp",
             tech: [
@@ -210,61 +225,45 @@ window.PORTFOLIO = {
   },
 
   contact: {
-    title: "Contact",
+    kicker: "04 — Contact",
+    title: "Let's build something that works.",
+    description:
+      "I'm looking for a junior backend role where I can learn from people who care about the craft. If that sounds like your team, say hello.",
+    note: "Usually replies within a day or two.",
     form: {
       // Leave empty to open the visitor's email app (mailto fallback).
       // Paste a Formspree endpoint such as https://formspree.io/f/xxxxxxx
       // here to use AJAX submission instead.
       action: "",
-      submitLabel: "Send Message"
+      submitLabel: "Send message"
     },
     links: [
       {
         label: "Email",
+        value: "37882827+maxalzamora@users.noreply.github.com",
         href: "mailto:37882827+maxalzamora@users.noreply.github.com",
         icon: "email"
       },
       {
         label: "GitHub",
+        value: "github.com/maxalzamora",
         href: "https://github.com/maxalzamora",
         icon: "github"
       }
       // Add LinkedIn (or any other link) when you have one:
-      // { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle/", icon: "linkedin" }
+      // { label: "LinkedIn", value: "linkedin.com/in/your-handle", href: "https://www.linkedin.com/in/your-handle/", icon: "linkedin" }
     ]
   },
 
   footer: {
-    copyright: "© 2026 Max Alzamora.",
-    location: "Barcelona, Spain",
-    handle: "# maxalzamora",
-    tagline: "Built with vanilla HTML, CSS and JavaScript."
+    tagline: "Backend developer · Barcelona",
+    copyright: "© 2026 Max Alzamora",
+    builtWith: "Built with vanilla HTML, CSS and JavaScript.",
+    backToTop: "Back to top"
   },
 
   theme: {
-    initialTooltip: "// Safety Protocol Active",
-    messages: [
-      "// Safety Protocol Active",
-      "// My eyes! It's way too bright!",
-      "// Dark mode is the only way, sorry!",
-      "// Once you go dark, you never go back.",
-      "// Who actually uses light mode?",
-      "// Eyes haven't seen the sun in years.",
-      "// Keeping things easy on the eyes.",
-      "// Light Mode = Eye Burn. Staying in the dark.",
-      "// The dark side has better code.",
-      "// Retinal safety protocol active.",
-      "// Nice try! But we stay in the shadows.",
-      "// Error: Sun is too bright. Stay in the room.",
-      "// Light mode is for lightbulbs.",
-      "// We don't do that here.",
-      "// Is it morning already? No thanks.",
-      "// My eyes are happier this way.",
-      "// Save your eyes, stay in the dark.",
-      "// Too bright! Switching back...",
-      "// Dark mode: 100%, Light mode: 0%.",
-      "// Light mode not found. Did you mean: dark?",
-      "// 404: sunlight not available in this region"
-    ]
+    lightLabel: "Switch to dark mode",
+    darkLabel: "Switch to light mode"
   }
 };

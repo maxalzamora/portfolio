@@ -4,55 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Max Alzamora — Junior Backend Developer in Barcelona. Python, Django, SQL and clean, tested backend systems.">
+    <meta name="description" content="Max Alzamora is a junior backend developer in Barcelona. Python, Django, SQL and clean, tested systems.">
     <meta name="keywords" content="Max Alzamora, Junior Backend Developer, Python, Django, SQL, Barcelona, Portfolio">
     <meta name="author" content="Max Alzamora">
-    <meta name="theme-color" content="#0a0b0d">
-    <meta name="color-scheme" content="dark">
-    <meta property="og:title" content="Max Alzamora | Junior Backend Developer">
+    <meta name="theme-color" content="#f4f1e8">
+    <meta name="color-scheme" content="light dark">
+    <meta property="og:title" content="Max Alzamora — Junior Backend Developer">
+    <meta name="twitter:title" content="Max Alzamora — Junior Backend Developer">
+    <meta name="twitter:description" content="Python, Django, SQL and clean, tested backend systems. Based in Barcelona and open to junior backend roles.">
     <meta property="og:description" content="Python, Django, SQL and clean, tested backend systems. Based in Barcelona and open to junior backend roles.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://maxalzamora.github.io/portfolio/">
     <meta property="og:image" content="https://maxalzamora.github.io/portfolio/src/assets/projects/portfolio.webp">
+    <meta property="og:image:alt" content="The Max Alzamora portfolio homepage">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://maxalzamora.github.io/portfolio/src/assets/projects/portfolio.webp">
     <link rel="canonical" href="https://maxalzamora.github.io/portfolio/">
-    <title>Max Alzamora | Junior Backend Developer</title>
+    <title>Max Alzamora — Junior Backend Developer</title>
     <link rel="icon" href="src/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="src/styles/main.css">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('portfolio-theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (error) {
+                /* Theme preference is optional. */
+            }
+        })();
+    </script>
 </head>
 
-<body class="loading">
+<body>
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-progress" id="scrollProgress"></div>
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
+            <a class="brand" href="#top" id="brand" aria-label="Max Alzamora — home">
+                <span class="brand-mark" id="brandMark" aria-hidden="true">MA</span>
+                <span class="brand-copy">
+                    <strong id="brandName">Max Alzamora</strong>
+                    <span id="brandRole">Junior Backend Developer</span>
+                </span>
+            </a>
 
-    <!-- Glitch Interference Overlay -->
-    <div id="glitchOverlay" class="glitch-overlay"></div>
+            <nav class="site-nav" id="siteNav" aria-label="Main navigation"></nav>
 
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="./" class="nav-logo" id="navLogo" aria-label="Home"></a>
-            <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger"></span>
-            </button>
-            <ul class="nav-menu" id="navMenu" role="menubar"></ul>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <a class="header-cta" href="#contact">
+                    Let's talk
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6"></path>
+                    </svg>
+                </a>
+
+                <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <main id="main-content" tabindex="-1">
-        <section class="hero" id="hero">
-            <div class="hero-grid" id="heroGrid"></div>
-            <div class="scroll-indicator" aria-hidden="true">
-                <span></span>
-            </div>
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="container" id="heroContainer"></div>
         </section>
 
         <section class="section" id="about" aria-labelledby="about-title">
             <div class="container" id="aboutContainer"></div>
         </section>
 
-        <section class="section" id="skills" aria-labelledby="skills-title">
+        <section class="section section-soft" id="skills" aria-labelledby="skills-title">
             <div class="container" id="skillsContainer"></div>
         </section>
 
@@ -60,42 +96,21 @@
             <div class="container" id="projectsContainer"></div>
         </section>
 
-        <section class="section" id="contact" aria-labelledby="contact-title">
+        <section class="section section-contact" id="contact" aria-labelledby="contact-title">
             <div class="container" id="contactContainer"></div>
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="site-footer" id="siteFooter">
         <div class="container" id="footerContainer"></div>
     </footer>
 
-    <button id="scrollTopBtn" class="scroll-top" aria-label="Scroll to top">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-    </button>
-
-    <!-- Image Lightbox -->
-    <div id="imageLightbox" class="lightbox" role="dialog" aria-label="Image preview" aria-hidden="true">
-        <div class="lightbox-backdrop"></div>
-        <button class="lightbox-close" aria-label="Close">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-        <div class="lightbox-content">
-            <img src="" alt="">
-            <span class="lightbox-caption"></span>
-        </div>
-    </div>
-
     <noscript>
         <style>
-            body.loading { overflow: auto; }
-            .anim-stagger { opacity: 1; visibility: visible; }
-            .noscript { max-width: 760px; margin: 6rem auto 2rem; padding: 2rem; border: 1px solid #21262d; border-radius: 8px; font-family: sans-serif; color: #e8ebee; }
-            .noscript a { color: #2dd484; }
+            .hero-copy, .profile-card, .section-heading, .section-aside, .section-main,
+            .project-row, .contact-panel, .site-footer .container { opacity: 1 !important; transform: none !important; }
+            .noscript { max-width: 760px; margin: 7rem auto 2rem; padding: 2rem; border: 1px solid #d9d2c3; border-radius: 18px; background: #fbf9f3; font-family: system-ui, sans-serif; color: #1a1e1c; line-height: 1.6; }
+            .noscript a { color: #0f766e; }
         </style>
         <div class="noscript">
             <h1>Max Alzamora</h1>
