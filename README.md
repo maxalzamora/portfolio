@@ -102,8 +102,17 @@ form: {
 
 ## Deploy to GitHub Pages
 
-This repository is already set up to publish from the `main` branch at the
-repository root. After editing:
+The site is static, so it publishes directly from the `main` branch at the
+repository root.
+
+If Pages is not enabled yet, do this once:
+
+1. Open the repository on GitHub.
+2. Go to **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select **main** and **/ (root)**, then click **Save**.
+
+After that, every push updates the site:
 
 ```bash
 git add .
@@ -111,15 +120,14 @@ git commit -m "Update portfolio content"
 git push
 ```
 
-GitHub Pages rebuilds automatically. The published URL is:
+The published URL is:
 
 ```text
 https://maxalzamora.github.io/portfolio/
 ```
 
-If you ever move the files to a new repository, enable **Settings → Pages →
-Build and deployment → Deploy from a branch → main / (root)**. For a clean
-`https://maxalzamora.github.io/` URL, name the repository
+If you ever move the files to a new repository, enable Pages there in the same
+way. For a clean `https://maxalzamora.github.io/` URL, name the repository
 `maxalzamora.github.io`.
 
 The `.nojekyll` file tells GitHub Pages to serve the files exactly as they are,
