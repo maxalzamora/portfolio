@@ -17,7 +17,30 @@
         }
     }
 
-    let currentLanguage = getStoredLanguage();
+    function getLanguageFromUrl() {
+        try {
+            const param = new URLSearchParams(window.location.search).get('lang') || '';
+            const language = param.trim().toLowerCase();
+            return hasLanguage(language) ? language : '';
+        } catch (error) {
+            return '';
+        }
+    }
+
+    function stripLanguageParam() {
+        try {
+            const url = new URL(window.location.href);
+            if (url.searchParams.has('lang')) {
+                url.searchParams.delete('lang');
+                window.history.replaceState(window.history.state, '', url);
+            }
+        } catch (error) {
+            /* History is optional; the parameter is only cosmetic. */
+        }
+    }
+
+    const urlLanguage = getLanguageFromUrl();
+    let currentLanguage = urlLanguage || getStoredLanguage();
     let data = I18N[currentLanguage] || I18N[DEFAULT_LANGUAGE];
     if (!data) {
         console.error('Portfolio content not found. Check src/data/content.js');
@@ -966,7 +989,8 @@
        Boot
        ------------------------------------------------------------------ */
     initDesignSettings();
-    setLanguage(currentLanguage, { persist: false });
+    setLanguage(currentLanguage, { persist: Boolean(urlLanguage) });
+    if (urlLanguage) stripLanguageParam();
     initTheme();
     initHeader();
     initLanguage();

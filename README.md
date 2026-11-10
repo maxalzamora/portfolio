@@ -51,6 +51,12 @@ The site ships in English, Spanish and Catalan. English is the default. The
 language picker in the header saves the visitor's choice in `localStorage`
 under `portfolio-language`.
 
+Link straight to a language with `?lang=`, e.g.
+`https://maxalzamora.github.io/portfolio/?lang=es` (valid values: `en`, `es`,
+`ca`). The shared language wins over the visitor's saved choice, is saved as
+their new preference, and the parameter is stripped from the address bar after
+the page loads. Unknown values are ignored.
+
 The translations live at the bottom of `src/data/content.js`:
 
 ```js

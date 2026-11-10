@@ -33,10 +33,18 @@
                 var accent = root.getAttribute('data-accent') || '';
                 var savedLanguage = localStorage.getItem('portfolio-language');
                 var supportedLanguages = { en: true, es: true, ca: true };
+                var urlLanguage = '';
+                try {
+                    urlLanguage = (new URLSearchParams(window.location.search).get('lang') || '').trim().toLowerCase();
+                } catch (error) {
+                    /* Location APIs are optional. */
+                }
 
                 root.setAttribute('data-theme', theme);
                 root.style.colorScheme = theme;
-                root.lang = supportedLanguages[savedLanguage] ? savedLanguage : 'en';
+                root.lang = supportedLanguages[urlLanguage]
+                    ? urlLanguage
+                    : (supportedLanguages[savedLanguage] ? savedLanguage : 'en');
                 if (accent) root.style.setProperty('--accent', accent);
             } catch (error) {
                 /* Theme and language preferences are optional. */
