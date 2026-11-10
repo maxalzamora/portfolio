@@ -124,41 +124,743 @@
     }
 
     /* ------------------------------------------------------------------
-       Theme
+       Design settings and the design lab
        ------------------------------------------------------------------ */
-    function initTheme() {
+    const root = document.documentElement;
+
+    const DESIGN_STORAGE = {
+        theme: 'portfolio-theme',
+        palette: 'portfolio-palette',
+        fonts: 'portfolio-fonts',
+        accent: 'portfolio-accent',
+        texture: 'portfolio-texture'
+    };
+
+    const PALETTES = [
+        {
+            id: 'paper',
+            name: 'Paper',
+            note: 'Warm paper & teal',
+            swatches: ['#f4f1e8', '#0e6f68', '#b45309', '#18201c']
+        },
+        {
+            id: 'terminal',
+            name: 'Terminal',
+            note: 'Krash-inspired green',
+            swatches: ['#0a0b0d', '#2dd484', '#4ecdc4', '#e8ebee']
+        },
+        {
+            id: 'ember',
+            name: 'Ember',
+            note: 'Coral complement',
+            swatches: ['#150e10', '#ff6b81', '#fbbf24', '#f6e9e8']
+        },
+        {
+            id: 'cobalt',
+            name: 'Cobalt',
+            note: 'Blue split-complement',
+            swatches: ['#0b1020', '#7aa2ff', '#fbbf24', '#e7ecf8']
+        },
+        {
+            id: 'iris',
+            name: 'Iris',
+            note: 'Violet triadic',
+            swatches: ['#120f1a', '#a78bfa', '#facc15', '#f3efff']
+        },
+        {
+            id: 'mono',
+            name: 'Mono',
+            note: 'Ink & newsprint',
+            swatches: ['#0b0b0b', '#f2f2f2', '#8a8a8a', '#2a2a2a']
+        }
+    ];
+
+    const FONT_PAIRS = [
+        {
+            id: 'editorial',
+            name: 'Editorial',
+            note: 'Fraunces + Inter',
+            sample: 'Aa',
+            sampleFamily: "'Fraunces', Georgia, serif"
+        },
+        {
+            id: 'terminal',
+            name: 'Terminal',
+            note: 'JetBrains + Inter',
+            sample: '</>',
+            sampleFamily: "'JetBrains Mono', monospace"
+        },
+        {
+            id: 'modern',
+            name: 'Modern',
+            note: 'Inter + Inter',
+            sample: 'Aa',
+            sampleFamily: "'Inter', sans-serif"
+        },
+        {
+            id: 'classic',
+            name: 'Classic',
+            note: 'Georgia + Inter',
+            sample: 'Aa',
+            sampleFamily: 'Georgia, serif'
+        },
+        {
+            id: 'mono',
+            name: 'Mono',
+            note: 'JetBrains everywhere',
+            sample: '01',
+            sampleFamily: "'JetBrains Mono', monospace"
+        }
+    ];
+
+    const TEXTURES = [
+        { id: 'soft', name: 'Soft', note: 'Radial washes' },
+        { id: 'grid', name: 'Grid', note: 'Dot matrix' },
+        { id: 'none', name: 'None', note: 'Flat colour' }
+    ];
+
+    const THEMES = [
+        { id: 'light', name: 'Light' },
+        { id: 'dark', name: 'Dark' }
+    ];
+
+    const PRESETS = [
+        {
+            id: 'editorial',
+            name: 'Editorial',
+            note: 'Paper · Fraunces',
+            palette: 'paper',
+            fonts: 'editorial',
+            texture: 'soft',
+            theme: 'light'
+        },
+        {
+            id: 'krash',
+            name: 'Krash',
+            note: 'Green terminal',
+            palette: 'terminal',
+            fonts: 'terminal',
+            texture: 'grid',
+            theme: 'dark'
+        },
+        {
+            id: 'ember',
+            name: 'Ember',
+            note: 'Coral serif',
+            palette: 'ember',
+            fonts: 'classic',
+            texture: 'soft',
+            theme: 'dark'
+        },
+        {
+            id: 'blueprint',
+            name: 'Blueprint',
+            note: 'Cobalt grid',
+            palette: 'cobalt',
+            fonts: 'modern',
+            texture: 'grid',
+            theme: 'dark'
+        },
+        {
+            id: 'newsprint',
+            name: 'Newsprint',
+            note: 'Mono classic',
+            palette: 'mono',
+            fonts: 'classic',
+            texture: 'none',
+            theme: 'light'
+        }
+    ];
+
+    const DEBUG_ICON = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"></path>
+    </svg>`;
+
+    const designState = {
+        theme: 'light',
+        palette: 'paper',
+        fonts: 'editorial',
+        texture: 'soft',
+        accent: ''
+    };
+
+    function readStorage(key) {
+        try {
+            return localStorage.getItem(key) || '';
+        } catch (error) {
+            return '';
+        }
+    }
+
+    function writeStorage(key, value) {
+        try {
+            if (value) {
+                localStorage.setItem(key, value);
+            } else {
+                localStorage.removeItem(key);
+            }
+        } catch (error) {
+            /* Storage can be unavailable in private mode. */
+        }
+    }
+
+    function removeStorage(key) {
+        try {
+            localStorage.removeItem(key);
+        } catch (error) {
+            /* Storage can be unavailable in private mode. */
+        }
+    }
+
+    function normalizeHex(value) {
+        if (!value) return '';
+        const input = String(value).trim().toLowerCase();
+
+        if (/^#[0-9a-f]{6}$/.test(input)) return input;
+        if (/^#[0-9a-f]{3}$/.test(input)) {
+            return `#${input.slice(1).split('').map((char) => char + char).join('')}`;
+        }
+
+        const match = input.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+        if (match) {
+            return rgbToHex({ r: Number(match[1]), g: Number(match[2]), b: Number(match[3]) });
+        }
+
+        return '';
+    }
+
+    function rgbToHex({ r, g, b }) {
+        const channel = (value) => Math.max(0, Math.min(255, Math.round(value))).toString(16).padStart(2, '0');
+        return `#${channel(r)}${channel(g)}${channel(b)}`;
+    }
+
+    function hexToRgb(hex) {
+        const normalized = normalizeHex(hex) || '#000000';
+        return {
+            r: parseInt(normalized.slice(1, 3), 16),
+            g: parseInt(normalized.slice(3, 5), 16),
+            b: parseInt(normalized.slice(5, 7), 16)
+        };
+    }
+
+    function mixHex(colorA, colorB, weightA) {
+        const a = hexToRgb(colorA);
+        const b = hexToRgb(colorB);
+        const weight = Math.max(0, Math.min(1, weightA));
+        return rgbToHex({
+            r: a.r * weight + b.r * (1 - weight),
+            g: a.g * weight + b.g * (1 - weight),
+            b: a.b * weight + b.b * (1 - weight)
+        });
+    }
+
+    function relativeLuminance({ r, g, b }) {
+        const channel = (value) => {
+            const normalized = value / 255;
+            return normalized <= 0.03928
+                ? normalized / 12.92
+                : Math.pow((normalized + 0.055) / 1.055, 2.4);
+        };
+        return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+    }
+
+    function contrastRatio(colorA, colorB) {
+        const a = relativeLuminance(colorA);
+        const b = relativeLuminance(colorB);
+        return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    }
+
+    function bestInk(color) {
+        const light = hexToRgb('#fffdf8');
+        const dark = hexToRgb('#071411');
+        return contrastRatio(color, light) >= contrastRatio(color, dark) ? '#fffdf8' : '#071411';
+    }
+
+    function ensureContrast(color, background, minimum) {
+        let result = color;
+        const backgroundRgb = hexToRgb(background);
+
+        for (let index = 0; index < 10; index += 1) {
+            if (contrastRatio(hexToRgb(result), backgroundRgb) >= minimum) break;
+            result = mixHex(result, '#ffffff', 0.78);
+        }
+
+        return result;
+    }
+
+    function getToken(name) {
+        return getComputedStyle(root).getPropertyValue(name).trim();
+    }
+
+    function updateThemeColor() {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (!meta) return;
+        const background = getToken('--bg');
+        if (background) meta.setAttribute('content', background);
+    }
+
+    function syncThemeToggle() {
         const toggle = $('#themeToggle');
         if (!toggle) return;
 
-        const themeMeta = document.querySelector('meta[name="theme-color"]');
-        const labelFor = (theme) => {
-            const labels = data.theme || {};
-            return theme === 'dark'
-                ? (labels.darkLabel || 'Switch to light mode')
-                : (labels.lightLabel || 'Switch to dark mode');
+        const labels = data.theme || {};
+        const isDark = designState.theme === 'dark';
+        toggle.setAttribute('aria-pressed', String(isDark));
+        toggle.setAttribute('aria-label', isDark
+            ? (labels.darkLabel || 'Switch to light mode')
+            : (labels.lightLabel || 'Switch to dark mode'));
+    }
+
+    function applyTheme(theme, options = {}) {
+        const { persist = true, sync = true } = options;
+        designState.theme = theme === 'dark' ? 'dark' : 'light';
+        root.setAttribute('data-theme', designState.theme);
+        root.style.colorScheme = designState.theme;
+
+        if (persist) writeStorage(DESIGN_STORAGE.theme, designState.theme);
+        if (designState.accent) {
+            applyCustomAccent(designState.accent, { persist: false, sync: false });
+        }
+
+        updateThemeColor();
+        syncThemeToggle();
+        if (sync) syncDebugUI();
+    }
+
+    function applyPalette(id, options = {}) {
+        const { persist = true, clearAccent = true, sync = true } = options;
+        const palette = PALETTES.find((item) => item.id === id) || PALETTES[0];
+
+        designState.palette = palette.id;
+        root.setAttribute('data-palette', palette.id);
+
+        if (persist) writeStorage(DESIGN_STORAGE.palette, palette.id);
+        if (clearAccent) {
+            clearCustomAccent({ persist: true, sync: false });
+        } else if (designState.accent) {
+            applyCustomAccent(designState.accent, { persist: false, sync: false });
+        }
+
+        updateThemeColor();
+        if (sync) syncDebugUI();
+    }
+
+    function applyFonts(id, options = {}) {
+        const { persist = true, sync = true } = options;
+        const pair = FONT_PAIRS.find((item) => item.id === id) || FONT_PAIRS[0];
+
+        designState.fonts = pair.id;
+        root.setAttribute('data-fonts', pair.id);
+        if (persist) writeStorage(DESIGN_STORAGE.fonts, pair.id);
+        if (sync) syncDebugUI();
+    }
+
+    function applyTexture(id, options = {}) {
+        const { persist = true, sync = true } = options;
+        const texture = TEXTURES.find((item) => item.id === id) || TEXTURES[0];
+
+        designState.texture = texture.id;
+        root.setAttribute('data-texture', texture.id);
+        if (persist) writeStorage(DESIGN_STORAGE.texture, texture.id);
+        if (sync) syncDebugUI();
+    }
+
+    function applyPreset(id) {
+        const preset = PRESETS.find((item) => item.id === id);
+        if (!preset) return;
+
+        applyPalette(preset.palette, { persist: true, clearAccent: true, sync: false });
+        applyFonts(preset.fonts, { persist: true, sync: false });
+        applyTexture(preset.texture, { persist: true, sync: false });
+        applyTheme(preset.theme, { persist: true, sync: false });
+        syncDebugUI();
+    }
+
+    function applyCustomAccent(hex, options = {}) {
+        const { persist = true, sync = true } = options;
+        const normalized = normalizeHex(hex);
+
+        if (!normalized) {
+            clearCustomAccent({ persist, sync });
+            return;
+        }
+
+        const accentRgb = hexToRgb(normalized);
+        const bgElev = getToken('--bg-elev') || '#ffffff';
+        const panelBg = getToken('--panel-bg') || '#111111';
+        const strongWeight = designState.theme === 'dark' ? 0.78 : 0.8;
+        const strongMix = designState.theme === 'dark' ? '#ffffff' : '#000000';
+        const accentStrong = mixHex(normalized, strongMix, strongWeight);
+        const accentSoft = mixHex(normalized, bgElev, 0.14);
+        const panelAccent = ensureContrast(mixHex(normalized, '#ffffff', 0.45), panelBg, 4.5);
+
+        root.style.setProperty('--accent', normalized);
+        root.style.setProperty('--accent-strong', accentStrong);
+        root.style.setProperty('--accent-soft', accentSoft);
+        root.style.setProperty('--accent-ink', bestInk(accentRgb));
+        root.style.setProperty('--accent-wash', `rgba(${accentRgb.r}, ${accentRgb.g}, ${accentRgb.b}, 0.10)`);
+        root.style.setProperty('--panel-accent', panelAccent);
+
+        designState.accent = normalized;
+        if (persist) writeStorage(DESIGN_STORAGE.accent, normalized);
+        updateThemeColor();
+        if (sync) syncDebugUI();
+    }
+
+    function clearCustomAccent(options = {}) {
+        const { persist = true, sync = true } = options;
+        designState.accent = '';
+
+        ['--accent', '--accent-strong', '--accent-soft', '--accent-ink', '--accent-wash', '--panel-accent']
+            .forEach((property) => root.style.removeProperty(property));
+
+        if (persist) removeStorage(DESIGN_STORAGE.accent);
+        updateThemeColor();
+        if (sync) syncDebugUI();
+    }
+
+    function updateAccentDisplay() {
+        const input = $('#debugAccent');
+        const value = $('#debugAccentValue');
+        const reset = $('#debugAccentReset');
+
+        if (input) {
+            input.value = designState.accent || normalizeHex(getToken('--accent')) || '#0e6f68';
+        }
+        if (value) {
+            value.textContent = designState.accent ? designState.accent.toUpperCase() : 'Palette accent';
+        }
+        if (reset) {
+            reset.disabled = !designState.accent;
+        }
+    }
+
+    function syncDebugUI() {
+        const panel = $('#debugPanel');
+        if (!panel) return;
+
+        $$('[data-palette-option]', panel).forEach((button) => {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-palette-option') === designState.palette));
+        });
+
+        $$('[data-font-option]', panel).forEach((button) => {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-font-option') === designState.fonts));
+        });
+
+        $$('[data-texture-option]', panel).forEach((button) => {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-texture-option') === designState.texture));
+        });
+
+        $$('[data-theme-option]', panel).forEach((button) => {
+            button.setAttribute('aria-pressed', String(button.getAttribute('data-theme-option') === designState.theme));
+        });
+
+        $$('[data-preset-option]', panel).forEach((button) => {
+            const preset = PRESETS.find((item) => item.id === button.getAttribute('data-preset-option'));
+            const active = Boolean(preset)
+                && !designState.accent
+                && preset.palette === designState.palette
+                && preset.fonts === designState.fonts
+                && preset.texture === designState.texture
+                && preset.theme === designState.theme;
+            button.setAttribute('aria-pressed', String(active));
+        });
+
+        const paletteName = $('#debugPaletteName');
+        const palette = PALETTES.find((item) => item.id === designState.palette);
+        if (paletteName) paletteName.textContent = palette ? palette.name : '';
+
+        updateAccentDisplay();
+        syncThemeToggle();
+    }
+
+    function initDesignSettings() {
+        const savedPalette = readStorage(DESIGN_STORAGE.palette) || root.getAttribute('data-palette') || 'paper';
+        const savedFonts = readStorage(DESIGN_STORAGE.fonts) || root.getAttribute('data-fonts') || 'editorial';
+        const savedTexture = readStorage(DESIGN_STORAGE.texture) || root.getAttribute('data-texture') || 'soft';
+
+        designState.palette = PALETTES.some((item) => item.id === savedPalette) ? savedPalette : 'paper';
+        designState.fonts = FONT_PAIRS.some((item) => item.id === savedFonts) ? savedFonts : 'editorial';
+        designState.texture = TEXTURES.some((item) => item.id === savedTexture) ? savedTexture : 'soft';
+        designState.theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        designState.accent = normalizeHex(readStorage(DESIGN_STORAGE.accent));
+
+        root.setAttribute('data-palette', designState.palette);
+        root.setAttribute('data-fonts', designState.fonts);
+        root.setAttribute('data-texture', designState.texture);
+        root.setAttribute('data-theme', designState.theme);
+        root.style.colorScheme = designState.theme;
+
+        if (designState.accent) {
+            applyCustomAccent(designState.accent, { persist: false, sync: false });
+        } else {
+            clearCustomAccent({ persist: true, sync: false });
+        }
+
+        updateThemeColor();
+        syncThemeToggle();
+    }
+
+    function initTheme() {
+        const toggle = $('#themeToggle');
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                applyTheme(designState.theme === 'dark' ? 'light' : 'dark');
+            });
+        }
+
+        applyTheme(designState.theme, { persist: false, sync: true });
+    }
+
+    function resetDesign() {
+        Object.values(DESIGN_STORAGE).forEach(removeStorage);
+        designState.accent = '';
+        clearCustomAccent({ persist: false, sync: false });
+        applyPalette('paper', { persist: false, clearAccent: false, sync: false });
+        applyFonts('editorial', { persist: false, sync: false });
+        applyTexture('soft', { persist: false, sync: false });
+        applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light', {
+            persist: false,
+            sync: false
+        });
+        syncDebugUI();
+    }
+
+    function initDebug() {
+        const config = data.debug || {};
+        const forceOpen = new URLSearchParams(window.location.search).has('debug');
+        if (config.enabled === false && !forceOpen) return;
+
+        const mount = $('#debugRoot');
+        if (!mount) return;
+
+        const paletteCards = PALETTES.map((palette) => `
+            <button class="debug-card" type="button" data-palette-option="${escapeHtml(palette.id)}" aria-pressed="false" aria-label="Use the ${escapeHtml(palette.name)} palette">
+                <span class="palette-swatches" aria-hidden="true">
+                    ${palette.swatches.map((color) => `<span style="background:${escapeHtml(color)}"></span>`).join('')}
+                </span>
+                <span class="palette-name">${escapeHtml(palette.name)}</span>
+                <span class="palette-note">${escapeHtml(palette.note)}</span>
+            </button>
+        `).join('');
+
+        const fontCards = FONT_PAIRS.map((pair) => `
+            <button class="debug-card font-card" type="button" data-font-option="${escapeHtml(pair.id)}" aria-pressed="false">
+                <span class="font-sample" style="font-family:${escapeHtml(pair.sampleFamily)}" aria-hidden="true">${escapeHtml(pair.sample)}</span>
+                <span class="font-name">${escapeHtml(pair.name)}</span>
+                <span class="font-note">${escapeHtml(pair.note)}</span>
+            </button>
+        `).join('');
+
+        const textureCards = TEXTURES.map((texture) => `
+            <button class="debug-card" type="button" data-texture-option="${escapeHtml(texture.id)}" aria-pressed="false">
+                <span class="texture-preview texture-preview--${escapeHtml(texture.id)}" aria-hidden="true"></span>
+                <span class="palette-name">${escapeHtml(texture.name)}</span>
+                <span class="palette-note">${escapeHtml(texture.note)}</span>
+            </button>
+        `).join('');
+
+        const themeButtons = THEMES.map((theme) => `
+            <button type="button" data-theme-option="${escapeHtml(theme.id)}" aria-pressed="false">${escapeHtml(theme.name)}</button>
+        `).join('');
+
+        const presetCards = PRESETS.map((preset) => {
+            const palette = PALETTES.find((item) => item.id === preset.palette) || PALETTES[0];
+            return `
+                <button class="debug-card preset-card" type="button" data-preset-option="${escapeHtml(preset.id)}" aria-pressed="false">
+                    <span class="palette-swatches" aria-hidden="true">
+                        ${palette.swatches.map((color) => `<span style="background:${escapeHtml(color)}"></span>`).join('')}
+                    </span>
+                    <span class="palette-name">${escapeHtml(preset.name)}</span>
+                    <span class="palette-note">${escapeHtml(preset.note)}</span>
+                </button>
+            `;
+        }).join('');
+
+        mount.innerHTML = `
+            <button class="debug-trigger" id="debugTrigger" type="button" aria-expanded="false" aria-controls="debugPanel">
+                ${DEBUG_ICON}
+                <span class="debug-trigger-dot" aria-hidden="true"></span>
+                <span>${escapeHtml(config.label || 'Lab')}</span>
+            </button>
+
+            <aside class="debug-panel" id="debugPanel" role="dialog" aria-labelledby="debugTitle" hidden>
+                <div class="debug-head">
+                    <div>
+                        <p class="debug-kicker">Debug</p>
+                        <h2 class="debug-title" id="debugTitle">${escapeHtml(config.title || 'Design lab')}</h2>
+                    </div>
+                    <button class="debug-close" id="debugClose" type="button" aria-label="Close design lab">&times;</button>
+                </div>
+
+                <p class="debug-note">${escapeHtml(config.note || 'Preview palettes, type, texture and accent colour. Settings stay in this browser.')}</p>
+
+                <section class="debug-section" aria-labelledby="debugPresetTitle">
+                    <div class="debug-section-head">
+                        <h3 class="debug-section-title" id="debugPresetTitle">Presets</h3>
+                        <span class="debug-section-value">One click</span>
+                    </div>
+                    <div class="debug-grid">${presetCards}</div>
+                </section>
+
+                <section class="debug-section" aria-labelledby="debugPaletteTitle">
+                    <div class="debug-section-head">
+                        <h3 class="debug-section-title" id="debugPaletteTitle">Palette</h3>
+                        <span class="debug-section-value" id="debugPaletteName" aria-live="polite"></span>
+                    </div>
+                    <div class="debug-grid">${paletteCards}</div>
+                </section>
+
+                <section class="debug-section" aria-labelledby="debugModeTitle">
+                    <div class="debug-section-head">
+                        <h3 class="debug-section-title" id="debugModeTitle">Mode</h3>
+                    </div>
+                    <div class="segmented" role="group" aria-label="Colour mode">${themeButtons}</div>
+                </section>
+
+                <section class="debug-section" aria-labelledby="debugTypeTitle">
+                    <div class="debug-section-head">
+                        <h3 class="debug-section-title" id="debugTypeTitle">Typography</h3>
+                    </div>
+                    <div class="debug-grid">${fontCards}</div>
+                </section>
+
+                <section class="debug-section" aria-labelledby="debugTextureTitle">
+                    <div class="debug-section-head">
+                        <h3 class="debug-section-title" id="debugTextureTitle">Texture</h3>
+                    </div>
+                    <div class="debug-grid debug-grid--three">${textureCards}</div>
+                </section>
+
+                <section class="debug-section" aria-labelledby="debugAccentTitle">
+                    <div class="debug-section-head">
+                        <h3 class="debug-section-title" id="debugAccentTitle">Accent</h3>
+                    </div>
+                    <div class="accent-row">
+                        <input class="accent-color" id="debugAccent" type="color" value="#0e6f68" aria-label="Custom accent colour">
+                        <span class="accent-copy">
+                            <span class="accent-label">Custom accent</span>
+                            <span class="accent-value" id="debugAccentValue">Palette accent</span>
+                        </span>
+                        <button class="accent-reset" id="debugAccentReset" type="button">Use palette</button>
+                    </div>
+                </section>
+
+                <div class="debug-footer">
+                    <button class="debug-reset" id="debugReset" type="button">Reset all</button>
+                    <span class="debug-hint">Alt + Shift + D</span>
+                </div>
+            </aside>
+        `;
+
+        const trigger = $('#debugTrigger');
+        const panel = $('#debugPanel');
+        const close = $('#debugClose');
+        const accentInput = $('#debugAccent');
+        const accentReset = $('#debugAccentReset');
+        const reset = $('#debugReset');
+        let lastFocused = null;
+
+        if (!trigger || !panel || !close) return;
+
+        const open = () => {
+            lastFocused = document.activeElement;
+            panel.hidden = false;
+            trigger.setAttribute('aria-expanded', 'true');
+            close.focus({ preventScroll: true });
         };
 
-        const apply = (theme) => {
-            const isDark = theme === 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-            toggle.setAttribute('aria-pressed', String(isDark));
-            toggle.setAttribute('aria-label', labelFor(theme));
-            if (themeMeta) {
-                themeMeta.setAttribute('content', isDark ? '#0f1412' : (data.meta.themeColor || '#f4f1e8'));
+        const closePanel = () => {
+            if (panel.hidden) return;
+            panel.hidden = true;
+            trigger.setAttribute('aria-expanded', 'false');
+            if (lastFocused && panel.contains(document.activeElement) && typeof lastFocused.focus === 'function') {
+                lastFocused.focus({ preventScroll: true });
             }
         };
 
-        apply(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+        const togglePanel = () => {
+            if (panel.hidden) {
+                open();
+            } else {
+                closePanel();
+            }
+        };
 
-        toggle.addEventListener('click', () => {
-            const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            apply(next);
-            try {
-                localStorage.setItem('portfolio-theme', next);
-            } catch (error) {
-                /* Storage can be unavailable in private mode. */
+        trigger.addEventListener('click', togglePanel);
+        close.addEventListener('click', closePanel);
+
+        panel.addEventListener('click', (event) => {
+            const presetButton = event.target.closest('[data-preset-option]');
+            if (presetButton) {
+                applyPreset(presetButton.getAttribute('data-preset-option'));
+                return;
+            }
+
+            const paletteButton = event.target.closest('[data-palette-option]');
+            if (paletteButton) {
+                applyPalette(paletteButton.getAttribute('data-palette-option'));
+                return;
+            }
+
+            const fontButton = event.target.closest('[data-font-option]');
+            if (fontButton) {
+                applyFonts(fontButton.getAttribute('data-font-option'));
+                return;
+            }
+
+            const textureButton = event.target.closest('[data-texture-option]');
+            if (textureButton) {
+                applyTexture(textureButton.getAttribute('data-texture-option'));
+                return;
+            }
+
+            const themeButton = event.target.closest('[data-theme-option]');
+            if (themeButton) {
+                applyTheme(themeButton.getAttribute('data-theme-option'));
             }
         });
+
+        if (accentInput) {
+            accentInput.addEventListener('input', () => {
+                applyCustomAccent(accentInput.value);
+            });
+        }
+
+        if (accentReset) {
+            accentReset.addEventListener('click', () => {
+                clearCustomAccent();
+            });
+        }
+
+        if (reset) {
+            reset.addEventListener('click', resetDesign);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.altKey && event.shiftKey && (event.key === 'd' || event.key === 'D')) {
+                event.preventDefault();
+                togglePanel();
+                return;
+            }
+
+            if (event.key === 'Escape' && !panel.hidden) {
+                closePanel();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (panel.hidden) return;
+            if (
+                event.target.closest('#debugPanel')
+                || event.target.closest('#debugTrigger')
+                || event.target.closest('#themeToggle')
+            ) return;
+            closePanel();
+        });
+
+        syncDebugUI();
+        if (forceOpen) open();
     }
 
     /* ------------------------------------------------------------------
@@ -723,6 +1425,7 @@
        Boot
        ------------------------------------------------------------------ */
     renderMeta();
+    initDesignSettings();
     renderHeader();
     renderHero();
     renderAbout();
@@ -735,5 +1438,6 @@
     initHeader();
     initReveal();
     initContactForm();
+    initDebug();
     fetchGitHubStats();
 })();

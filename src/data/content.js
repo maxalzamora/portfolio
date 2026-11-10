@@ -265,5 +265,16 @@ window.PORTFOLIO = {
   theme: {
     lightLabel: "Switch to dark mode",
     darkLabel: "Switch to light mode"
+  },
+
+  debug: {
+    // The design lab is a floating preview tool, not part of the content.
+    // Set this to false before sharing the site. You can still open it with
+    // ?debug=1 (or the Alt+Shift+D shortcut) while the flag is false.
+    enabled: true,
+    label: "Lab",
+    title: "Design lab",
+    note:
+      "Preview palettes, type, texture and accent colour. Settings stay in this browser."
   }
 };

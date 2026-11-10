@@ -26,11 +26,23 @@
     <script>
         (function () {
             try {
+                var root = document.documentElement;
                 var saved = localStorage.getItem('portfolio-theme');
                 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (saved === 'dark' || (!saved && prefersDark)) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                }
+                var theme = saved === 'dark' || (!saved && prefersDark) ? 'dark' : 'light';
+
+                root.setAttribute('data-theme', theme);
+                root.style.colorScheme = theme;
+
+                var palette = localStorage.getItem('portfolio-palette');
+                var fonts = localStorage.getItem('portfolio-fonts');
+                var texture = localStorage.getItem('portfolio-texture');
+                var accent = localStorage.getItem('portfolio-accent');
+
+                if (palette) root.setAttribute('data-palette', palette);
+                if (fonts) root.setAttribute('data-fonts', fonts);
+                if (texture) root.setAttribute('data-texture', texture);
+                if (accent) root.style.setProperty('--accent', accent);
             } catch (error) {
                 /* Theme preference is optional. */
             }
@@ -104,6 +116,8 @@
     <footer class="site-footer" id="siteFooter">
         <div class="container" id="footerContainer"></div>
     </footer>
+
+    <div id="debugRoot"></div>
 
     <noscript>
         <style>
