@@ -13,6 +13,7 @@ build step — so it can be hosted directly on GitHub Pages.
 - Skills grouped into readable rows
 - Alternating project rows with screenshots, tech tags and links
 - A dark contact panel with a form and direct contact links
+- English, Spanish and Catalan content with a header language picker
 - Light and dark themes, saved in `localStorage`
 - Responsive navigation, subtle scroll reveals and reduced-motion support
 - No Contribution & Research section
@@ -29,7 +30,7 @@ Almost everything lives in one file:
 src/data/content.js
 ```
 
-Open it and change the object at the top of the file. You can edit:
+Open it and change the objects near the top of the file. You can edit:
 
 - the page title, description, keywords, canonical URL and social preview image
 - your name, initials, role, location and availability
@@ -39,10 +40,40 @@ Open it and change the object at the top of the file. You can edit:
 - skill categories and tags
 - project categories, projects, screenshots, links and tech tags
 - contact copy, links and the contact form
-- footer text and theme labels
+- footer text, theme labels and interface strings
 
 Paragraph fields accept normal HTML, so you can use `<strong>bold</strong>` or
 `<code>inline code</code>` where it helps.
+
+### Languages
+
+The site ships in English, Spanish and Catalan. English is the default. The
+language picker in the header saves the visitor's choice in `localStorage`
+under `portfolio-language`.
+
+The translations live at the bottom of `src/data/content.js`:
+
+```js
+window.PORTFOLIO_LANGUAGES = {
+  en: window.PORTFOLIO,
+  es: { /* Spanish copy */ },
+  ca: { /* Catalan copy */ }
+};
+```
+
+Each language is a complete copy of the content object, including links,
+project URLs, images and interface strings under `ui`. When you change a shared
+detail such as a project URL or screenshot, update it in all three language
+objects. The `ui` object holds labels such as `Skip to content`, `Open menu`,
+form field labels and form status messages.
+
+The `<html lang>` attribute is updated automatically. The inline script in
+`index.html` also sets the saved language on `<html>` before the page renders,
+so the document language is correct as early as possible.
+
+To add another language, add a key to `window.PORTFOLIO_LANGUAGES`, add an
+`<option>` to `#languageSelect` in `index.html`, and add the code to the
+`supportedLanguages` map in the inline script.
 
 ### Add a project
 
@@ -98,7 +129,8 @@ To change the look, update `data-palette`, `data-fonts`, `data-texture` or
 - Textures: `soft`, `grid`, `none`
 
 The header toggle still remembers the visitor's light/dark choice in
-`localStorage`.
+`localStorage`, and the language picker remembers their language choice under
+`portfolio-language`.
 
 ## Preview locally
 
@@ -119,8 +151,9 @@ The form has two modes:
 
 1. **Default (no backend):** the visitor's email app opens with the subject and
    message already filled in. This works on GitHub Pages.
-2. **Formspree:** paste your endpoint into `contact.form.action` in
-   `src/data/content.js` and the form submits over AJAX instead:
+2. **Formspree:** paste your endpoint into `contact.form.action` for each
+   language object in `src/data/content.js` and the form submits over AJAX
+   instead:
 
 ```js
 form: {
@@ -171,9 +204,9 @@ without Jekyll processing.
 ├── README.md
 └── src/
     ├── data/
-    │   └── content.js          # ← edit this for content changes
+    │   └── content.js          # ← edit this for content and translations
     ├── scripts/
-    │   └── main.js             # Rendering, theme, navigation and form
+    │   └── main.js             # Rendering, i18n, theme, navigation and form
     ├── styles/
     │   └── main.css            # Design tokens, layout and responsive styles
     └── assets/
@@ -186,6 +219,7 @@ without Jekyll processing.
 ## Notes
 
 - The email address in `content.js` is a GitHub noreply address. Replace it with
-  your real contact email before sharing the site widely.
+  your real contact email in all three language objects before sharing the site
+  widely.
 - To add LinkedIn, uncomment the example in `contact.links` and add your URL.
 - The contact form and project images work without any third-party services.

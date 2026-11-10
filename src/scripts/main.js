@@ -3,7 +3,22 @@
 
     document.documentElement.classList.add('js');
 
-    const data = window.PORTFOLIO;
+    const I18N = window.PORTFOLIO_LANGUAGES || { en: window.PORTFOLIO };
+    const DEFAULT_LANGUAGE = 'en';
+    const LANGUAGE_STORAGE = 'portfolio-language';
+    const hasLanguage = (language) => Object.prototype.hasOwnProperty.call(I18N, language);
+
+    function getStoredLanguage() {
+        try {
+            const saved = localStorage.getItem(LANGUAGE_STORAGE);
+            return hasLanguage(saved) ? saved : DEFAULT_LANGUAGE;
+        } catch (error) {
+            return DEFAULT_LANGUAGE;
+        }
+    }
+
+    let currentLanguage = getStoredLanguage();
+    let data = I18N[currentLanguage] || I18N[DEFAULT_LANGUAGE];
     if (!data) {
         console.error('Portfolio content not found. Check src/data/content.js');
         return;
@@ -92,6 +107,7 @@
         setMeta('theme-color', meta.themeColor);
         setMeta('og:title', meta.title, 'property');
         setMeta('og:description', meta.description, 'property');
+        setMeta('og:locale', meta.locale, 'property');
         setMeta('og:url', meta.url, 'property');
         setMeta('og:image', meta.ogImage, 'property');
         setMeta('twitter:card', 'summary_large_image');
@@ -101,6 +117,67 @@
 
         const canonical = document.querySelector('link[rel="canonical"]');
         if (canonical && meta.url) canonical.setAttribute('href', meta.url);
+    }
+
+    function renderStaticText() {
+        const ui = data.ui || {};
+        const skip = $('#skipLink');
+        const nav = $('#siteNav');
+        const ctaLabel = $('#headerCtaLabel');
+        const languageLabel = $('#languageLabel');
+        const navToggle = $('#navToggle');
+
+        if (skip) skip.textContent = ui.skipToContent || 'Skip to content';
+        if (nav) nav.setAttribute('aria-label', ui.mainNavigation || 'Main navigation');
+        if (ctaLabel) ctaLabel.textContent = ui.headerCta || "Let's talk";
+        if (languageLabel) languageLabel.textContent = ui.language || 'Language';
+
+        if (navToggle) {
+            const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-label', isOpen
+                ? (ui.closeMenu || 'Close menu')
+                : (ui.openMenu || 'Open menu'));
+        }
+    }
+
+    function renderAll() {
+        renderMeta();
+        renderStaticText();
+        renderHeader();
+        renderHero();
+        renderAbout();
+        renderSkills();
+        renderProjects();
+        renderContact();
+        renderFooter();
+        updateThemeColor();
+        syncThemeToggle();
+        initReveal();
+        initContactForm();
+        fetchGitHubStats();
+    }
+
+    function setLanguage(language, options = {}) {
+        const { persist = true } = options;
+        const next = hasLanguage(language) ? language : DEFAULT_LANGUAGE;
+
+        currentLanguage = next;
+        data = I18N[next] || I18N[DEFAULT_LANGUAGE];
+        root.lang = next;
+        if (persist) writeStorage(LANGUAGE_STORAGE, next);
+
+        const select = $('#languageSelect');
+        if (select) select.value = next;
+
+        renderAll();
+    }
+
+    function initLanguage() {
+        const select = $('#languageSelect');
+        if (!select) return;
+
+        select.value = currentLanguage;
+        select.addEventListener('change', () => setLanguage(select.value));
     }
 
     function renderHeader() {
@@ -113,7 +190,7 @@
         if (brandMark) brandMark.textContent = identity.initials || 'MA';
         if (brandName) brandName.textContent = identity.name || '';
         if (brandRole) brandRole.textContent = identity.role || '';
-        if (brand) brand.setAttribute('aria-label', `${identity.name || 'Home'} — home`);
+        if (brand) brand.setAttribute('aria-label', `${identity.name || 'Home'} — ${data.ui?.home || 'home'}`);
 
         const nav = $('#siteNav');
         if (nav) {
@@ -324,6 +401,7 @@
         `).join('');
 
         const profile = hero.profile || {};
+        const ui = data.ui || {};
 
         container.innerHTML = `
             <div class="hero-inner">
@@ -348,7 +426,7 @@
                     <dl class="hero-facts">${facts}</dl>
                 </div>
 
-                <aside class="profile-card" aria-label="Profile summary">
+                <aside class="profile-card" aria-label="${escapeHtml(ui.profileSummary || 'Profile summary')}">
                     <div class="profile-top">
                         <div class="profile-photo-wrap">
                             <img class="profile-photo" src="${escapeHtml(hero.image || '')}" alt="${escapeHtml(hero.imageAlt || hero.profile && hero.profile.name || '')}" width="400" height="400" loading="eager" decoding="async">
@@ -360,7 +438,7 @@
                         </div>
                     </div>
                     <p class="profile-note">${profile.note || ''}</p>
-                    <ul class="profile-stack" aria-label="Core stack">${stack}</ul>
+                    <ul class="profile-stack" aria-label="${escapeHtml(ui.coreStack || 'Core stack')}">${stack}</ul>
                     <div class="profile-foot">
                         <span>${escapeHtml(profile.availability || data.identity.availability)}</span>
                         <span>${escapeHtml(data.identity.location || '')}</span>
@@ -368,7 +446,7 @@
                 </aside>
             </div>
             <div class="hero-foot" aria-hidden="true">
-                <span>Scroll to explore</span>
+                <span>${escapeHtml(ui.scrollToExplore || 'Scroll to explore')}</span>
                 <span class="hero-foot-line"></span>
                 <span>01 / 04</span>
             </div>
@@ -452,15 +530,16 @@
        ------------------------------------------------------------------ */
     function projectLinks(project) {
         const links = [];
+        const ui = data.ui || {};
 
         if (project.repo) {
             links.push(`<a class="text-link" href="${escapeHtml(project.repo)}" target="_blank" rel="noopener noreferrer">${ICONS.github}<span>GitHub</span></a>`);
         }
         if (project.live) {
-            links.push(`<a class="text-link" href="${escapeHtml(project.live)}" target="_blank" rel="noopener noreferrer">${ICONS.external}<span>Live site</span></a>`);
+            links.push(`<a class="text-link" href="${escapeHtml(project.live)}" target="_blank" rel="noopener noreferrer">${ICONS.external}<span>${escapeHtml(ui.liveSite || 'Live site')}</span></a>`);
         }
         if (project.private) {
-            links.push(`<span class="private-badge">${ICONS.lock}<span>Private</span></span>`);
+            links.push(`<span class="private-badge">${ICONS.lock}<span>${escapeHtml(ui.private || 'Private')}</span></span>`);
         }
 
         return links.length ? `<div class="project-links">${links.join('')}</div>` : '';
@@ -476,6 +555,7 @@
 
     function projectRow(project, index) {
         const number = String(index + 1).padStart(2, '0');
+        const fallbackType = data.ui?.projectFallback || 'Project';
         const image = project.image
             ? `<div class="project-image-frame"><img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt || project.name)}" width="1200" height="750" loading="lazy" decoding="async"></div>`
             : '<div class="project-image-frame project-image-placeholder" aria-hidden="true"></div>';
@@ -488,7 +568,7 @@
                 </div>
                 <div class="project-info">
                     <div class="project-meta">
-                        <span>${escapeHtml(project.type || 'Project')}</span>
+                        <span>${escapeHtml(project.type || fallbackType)}</span>
                         <span>${escapeHtml(project.year || '')}</span>
                         ${projectStats(project)}
                     </div>
@@ -509,8 +589,15 @@
         if (!container) return;
 
         let projectIndex = 0;
+        const ui = data.ui || {};
         const groups = (projects.categories || []).map((category) => {
-            const rows = (category.projects || []).map((project) => {
+            const categoryProjects = category.projects || [];
+            const count = categoryProjects.length;
+            const projectLabel = count === 1
+                ? (ui.project || 'project')
+                : (ui.projects || 'projects');
+
+            const rows = categoryProjects.map((project) => {
                 const html = projectRow(project, projectIndex);
                 projectIndex += 1;
                 return html;
@@ -520,7 +607,7 @@
                 <div class="project-group">
                     <div class="project-group-head reveal">
                         <span>${escapeHtml(category.title)}</span>
-                        <span>${(category.projects || []).length} ${(category.projects || []).length === 1 ? 'project' : 'projects'}</span>
+                        <span>${count} ${escapeHtml(projectLabel)}</span>
                     </div>
                     ${rows}
                 </div>
@@ -545,6 +632,7 @@
     function renderContact() {
         const contact = data.contact || {};
         const form = contact.form || {};
+        const ui = data.ui || {};
         const container = $('#contactContainer');
         if (!container) return;
 
@@ -576,23 +664,23 @@
 
                 <form id="contactForm" class="contact-form" action="${escapeHtml(formAction)}" method="POST"${formAction ? '' : ` data-mailto="${escapeHtml(emailAddress)}"`}>
                     <div class="form-field">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Ada Lovelace" autocomplete="name" required>
+                        <label for="name">${escapeHtml(ui.formName || 'Name')}</label>
+                        <input type="text" id="name" name="name" placeholder="${escapeHtml(ui.formNamePlaceholder || 'Ada Lovelace')}" autocomplete="name" required>
                     </div>
                     <div class="form-field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="ada@example.com" autocomplete="email" required>
+                        <label for="email">${escapeHtml(ui.formEmail || 'Email')}</label>
+                        <input type="email" id="email" name="email" placeholder="${escapeHtml(ui.formEmailPlaceholder || 'ada@example.com')}" autocomplete="email" required>
                     </div>
                     <div class="form-field">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" placeholder="Junior backend role" required>
+                        <label for="subject">${escapeHtml(ui.formSubject || 'Subject')}</label>
+                        <input type="text" id="subject" name="subject" placeholder="${escapeHtml(ui.formSubjectPlaceholder || 'Junior backend role')}" required>
                     </div>
                     <div class="form-field">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Tell me about the role or project…" required></textarea>
+                        <label for="message">${escapeHtml(ui.formMessage || 'Message')}</label>
+                        <textarea id="message" name="message" rows="4" placeholder="${escapeHtml(ui.formMessagePlaceholder || 'Tell me about the role or project…')}" required></textarea>
                     </div>
                     <button type="submit" id="submitBtn" class="button button-primary form-submit">
-                        <span class="btn-text">${escapeHtml(form.submitLabel || 'Send message')}</span>
+                        <span class="btn-text">${escapeHtml(form.submitLabel || ui.sendMessage || 'Send message')}</span>
                         ${ICONS.send}
                     </button>
                     <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
@@ -644,11 +732,14 @@
 
         if (!nav || !toggle) return;
 
+        const openMenuLabel = () => data.ui?.openMenu || 'Open menu';
+        const closeMenuLabel = () => data.ui?.closeMenu || 'Close menu';
+
         const closeNav = () => {
             nav.classList.remove('is-open');
             toggle.classList.remove('is-open');
             toggle.setAttribute('aria-expanded', 'false');
-            toggle.setAttribute('aria-label', 'Open menu');
+            toggle.setAttribute('aria-label', openMenuLabel());
             document.body.classList.remove('nav-open');
         };
 
@@ -657,7 +748,7 @@
             nav.classList.toggle('is-open', open);
             toggle.classList.toggle('is-open', open);
             toggle.setAttribute('aria-expanded', String(open));
-            toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            toggle.setAttribute('aria-label', open ? closeMenuLabel() : openMenuLabel());
             document.body.classList.toggle('nav-open', open);
         });
 
@@ -679,7 +770,14 @@
         });
     }
 
+    let revealObserver = null;
+
     function initReveal() {
+        if (revealObserver) {
+            revealObserver.disconnect();
+            revealObserver = null;
+        }
+
         const elements = $$('.reveal');
         if (!elements.length) return;
 
@@ -700,6 +798,7 @@
             threshold: 0.08
         });
 
+        revealObserver = observer;
         elements.forEach((element) => observer.observe(element));
     }
 
@@ -709,6 +808,7 @@
         const submit = $('#submitBtn');
         if (!form || !status || !submit) return;
 
+        const ui = data.ui || {};
         const buttonText = submit.querySelector('.btn-text');
         const originalText = buttonText ? buttonText.textContent : '';
 
@@ -728,7 +828,7 @@
 
             submit.classList.add('is-loading');
             submit.disabled = true;
-            if (buttonText) buttonText.textContent = 'Sending…';
+            if (buttonText) buttonText.textContent = ui.sending || 'Sending…';
             status.className = 'form-status';
             status.textContent = '';
 
@@ -737,13 +837,13 @@
             const mailto = form.getAttribute('data-mailto');
 
             if (!action && !mailto) {
-                showStatus('No contact method is configured yet.', 'is-error');
+                showStatus(ui.noContactMethod || 'No contact method is configured yet.', 'is-error');
                 resetButton();
                 return;
             }
 
             if (!action && mailto) {
-                const subject = formData.get('subject') || 'Portfolio enquiry';
+                const subject = formData.get('subject') || ui.portfolioEnquiry || 'Portfolio enquiry';
                 const name = formData.get('name') || '';
                 const email = formData.get('email') || '';
                 const message = formData.get('message') || '';
@@ -751,7 +851,7 @@
                 const mailtoUrl = `mailto:${mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
                 await new Promise((resolve) => setTimeout(resolve, 350));
-                showStatus('Opening your email app…', 'is-success');
+                showStatus(ui.openingEmail || 'Opening your email app…', 'is-success');
                 window.location.href = mailtoUrl;
 
                 setTimeout(() => {
@@ -771,8 +871,8 @@
 
                 if (response.ok) {
                     form.reset();
-                    showStatus('Message sent. Thanks for reaching out.', 'is-success');
-                    if (buttonText) buttonText.textContent = 'Sent';
+                    showStatus(ui.messageSent || 'Message sent. Thanks for reaching out.', 'is-success');
+                    if (buttonText) buttonText.textContent = ui.sent || 'Sent';
                     setTimeout(() => {
                         resetButton();
                         status.className = 'form-status';
@@ -781,7 +881,7 @@
                     return;
                 }
 
-                let detail = 'Something went wrong. Please try again.';
+                let detail = ui.genericError || 'Something went wrong. Please try again.';
                 try {
                     const body = await response.json();
                     if (Array.isArray(body.errors) && body.errors.length) {
@@ -792,7 +892,7 @@
                 }
                 showStatus(detail, 'is-error');
             } catch (error) {
-                showStatus('Connection failed. Please check your internet and try again.', 'is-error');
+                showStatus(ui.connectionError || 'Connection failed. Please check your internet and try again.', 'is-error');
             }
 
             resetButton();
@@ -865,19 +965,9 @@
     /* ------------------------------------------------------------------
        Boot
        ------------------------------------------------------------------ */
-    renderMeta();
     initDesignSettings();
-    renderHeader();
-    renderHero();
-    renderAbout();
-    renderSkills();
-    renderProjects();
-    renderContact();
-    renderFooter();
-
+    setLanguage(currentLanguage, { persist: false });
     initTheme();
     initHeader();
-    initReveal();
-    initContactForm();
-    fetchGitHubStats();
+    initLanguage();
 })();

@@ -901,6 +901,85 @@ button {
     flex: 0 0 auto;
 }
 
+.language-picker {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 0.45rem 0 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-2);
+    background: transparent;
+    transition:
+        background-color 0.25s var(--ease),
+        border-color 0.25s var(--ease),
+        color 0.25s var(--ease);
+}
+
+.language-picker:hover,
+.language-picker:focus-within {
+    background: var(--bg-elev);
+    border-color: var(--line-strong);
+    color: var(--ink);
+}
+
+.language-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.language-icon,
+.language-chevron {
+    flex: 0 0 auto;
+    pointer-events: none;
+}
+
+.language-icon {
+    margin-right: 0.3rem;
+    opacity: 0.7;
+}
+
+.language-chevron {
+    margin-left: 0.1rem;
+    opacity: 0.55;
+}
+
+.language-picker select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+}
+
+.language-picker select:focus-visible {
+    border-radius: 4px;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.language-picker option {
+    color: #111;
+    background: #fff;
+    font-family: var(--font-sans);
+    text-transform: none;
+}
+
 .theme-toggle {
     display: grid;
     place-items: center;
@@ -2071,6 +2150,10 @@ button {
         display: flex;
     }
 
+    .header-actions {
+        margin-left: auto;
+    }
+
     .header-cta {
         display: none;
     }
@@ -2180,6 +2263,19 @@ button {
     .nav-toggle {
         width: 36px;
         height: 36px;
+    }
+
+    .language-picker {
+        height: 36px;
+        padding: 0 0.35rem 0 0.45rem;
+    }
+
+    .language-picker .language-icon {
+        display: none;
+    }
+
+    .language-picker select {
+        font-size: 0.55rem;
     }
 
     .site-nav {
@@ -2295,7 +2391,21 @@ button {
     }
 }
 
+@media (max-width: 360px) {
+    .brand-copy {
+        display: none;
+    }
+}
+
 @media (max-width: 420px) {
+    .language-picker {
+        padding: 0 0.35rem;
+    }
+
+    .language-picker .language-chevron {
+        display: none;
+    }
+
     .hero-actions .button {
         width: 100%;
     }
