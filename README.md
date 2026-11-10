@@ -14,13 +14,12 @@ build step — so it can be hosted directly on GitHub Pages.
 - Alternating project rows with screenshots, tech tags and links
 - A dark contact panel with a form and direct contact links
 - Light and dark themes, saved in `localStorage`
-- A built-in design lab for previewing palettes, type pairings, textures and accent colours
 - Responsive navigation, subtle scroll reveals and reduced-motion support
 - No Contribution & Research section
 
 The design is original to this portfolio. The current default uses the Terminal
-palette, Modern type and a violet custom accent; the warm paper/teal editorial
-look is still available as the Editorial preset in the design lab.
+palette, Modern type and a violet custom accent. Other palettes and type
+pairings remain available by changing the attributes on the `<html>` element.
 
 ## Edit the site
 
@@ -91,37 +90,15 @@ in `src/styles/main.css`; the Paper palette is in `:root` and
 `[data-theme="dark"]`. All palettes use the same token names, so changing
 `--accent` in each block is usually enough to retheme the site.
 
-To make another palette permanent, change `data-palette` and `data-fonts` (or
-`data-texture`) to another id. Use **Reset all** first if you have saved a Lab
-choice, because saved choices take precedence over the HTML attributes.
+To change the look, update `data-palette`, `data-fonts`, `data-texture` or
+`data-accent` to another id or colour:
 
-## Design lab
+- Palettes: `paper`, `terminal`, `ember`, `cobalt`, `iris`, `mono`
+- Font pairings: `editorial`, `terminal`, `modern`, `classic`, `mono`
+- Textures: `soft`, `grid`, `none`
 
-The floating **Lab** button in the bottom-right corner opens a preview panel.
-You can also use **Alt + Shift + D** or add `?debug=1` to the URL.
-
-It lets you try:
-
-- **Presets:** one-click combinations such as Editorial, Krash, Ember,
-  Blueprint and Newsprint
-- **Palette:** Terminal (current default, a green Krash-inspired scheme), Paper
-  (warm editorial), Ember (coral complement), Cobalt (blue split-complement),
-  Iris (violet triadic) and Mono (ink on newsprint)
-- **Mode:** light or dark
-- **Typography:** Editorial (Fraunces + Inter), Terminal (JetBrains Mono +
-  Inter), Modern (Inter), Classic (Georgia + Inter) and Mono (JetBrains Mono)
-- **Texture:** soft radial washes, a dot grid or a flat colour
-- **Accent:** any custom colour; the site ships with `#876DFE`, and the tints,
-  hover colour, focus rings and contact-panel accent are derived automatically
-
-Choices are saved in `localStorage` and applied before the page paints.
-**Reset all** returns to the defaults.
-
-The lab is a preview tool. Set `debug.enabled` to `false` in
-`src/data/content.js` before sharing the site; `?debug=1` still opens it for
-you. To add a palette, add a token block in `src/styles/main.css` and an entry
-in the `PALETTES` array in `src/scripts/main.js`. To add a font pairing, add a
-`[data-fonts="…"]` block and a `FONT_PAIRS` entry.
+The header toggle still remembers the visitor's light/dark choice in
+`localStorage`.
 
 ## Preview locally
 
@@ -196,7 +173,7 @@ without Jekyll processing.
     ├── data/
     │   └── content.js          # ← edit this for content changes
     ├── scripts/
-    │   └── main.js             # Rendering, themes, design lab, navigation and form
+    │   └── main.js             # Rendering, theme, navigation and form
     ├── styles/
     │   └── main.css            # Design tokens, layout and responsive styles
     └── assets/
