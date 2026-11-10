@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-palette="terminal" data-fonts="modern" data-texture="soft" data-accent="#876DFE">
 
 <head>
     <meta charset="UTF-8">
@@ -27,6 +27,14 @@
         (function () {
             try {
                 var root = document.documentElement;
+                var defaults = {
+                    palette: root.getAttribute('data-palette') || 'paper',
+                    fonts: root.getAttribute('data-fonts') || 'editorial',
+                    texture: root.getAttribute('data-texture') || 'soft',
+                    accent: root.getAttribute('data-accent') || ''
+                };
+                window.__PORTFOLIO_DEFAULTS__ = defaults;
+
                 var saved = localStorage.getItem('portfolio-theme');
                 var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 var theme = saved === 'dark' || (!saved && prefersDark) ? 'dark' : 'light';
@@ -42,7 +50,14 @@
                 if (palette) root.setAttribute('data-palette', palette);
                 if (fonts) root.setAttribute('data-fonts', fonts);
                 if (texture) root.setAttribute('data-texture', texture);
-                if (accent) root.style.setProperty('--accent', accent);
+
+                if (accent === 'palette') {
+                    root.style.removeProperty('--accent');
+                } else if (accent) {
+                    root.style.setProperty('--accent', accent);
+                } else if (defaults.accent) {
+                    root.style.setProperty('--accent', defaults.accent);
+                }
             } catch (error) {
                 /* Theme preference is optional. */
             }

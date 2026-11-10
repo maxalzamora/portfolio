@@ -18,8 +18,9 @@ build step — so it can be hosted directly on GitHub Pages.
 - Responsive navigation, subtle scroll reveals and reduced-motion support
 - No Contribution & Research section
 
-The design is original to this portfolio: warm paper tones, teal accents,
-Fraunces display type and a content-first layout.
+The design is original to this portfolio. The current default uses the Terminal
+palette, Modern type and a violet custom accent; the warm paper/teal editorial
+look is still available as the Editorial preset in the design lab.
 
 ## Edit the site
 
@@ -76,16 +77,23 @@ so screenshots at roughly 1200 × 750 look best.
 
 ### Change the theme
 
-The default light palette is in `:root` at the top of `src/styles/main.css`.
-The dark palette is in the `[data-theme="dark"]` block directly below it. Both
-use the same token names, so changing `--accent` in each block is usually enough
-to retheme the site.
+The site's defaults are set on the `<html>` element in `index.html`:
 
-The other palettes live in `[data-palette="…"]` blocks below those. To make one
-permanent, add `data-palette="terminal"` (or another palette id) and
-`data-fonts="terminal"` to the `<html>` element in `index.html`. Use **Reset
-all** first if you have saved a Lab choice, because saved choices take
-precedence over the HTML attributes.
+```html
+<html lang="en" data-palette="terminal" data-fonts="modern"
+      data-texture="soft" data-accent="#876DFE">
+```
+
+`data-accent` is optional. Remove it to use the palette's own accent, or change
+it to any hex colour. The Terminal palette tokens live in
+`[data-palette="terminal"]` and `[data-palette="terminal"][data-theme="dark"]`
+in `src/styles/main.css`; the Paper palette is in `:root` and
+`[data-theme="dark"]`. All palettes use the same token names, so changing
+`--accent` in each block is usually enough to retheme the site.
+
+To make another palette permanent, change `data-palette` and `data-fonts` (or
+`data-texture`) to another id. Use **Reset all** first if you have saved a Lab
+choice, because saved choices take precedence over the HTML attributes.
 
 ## Design lab
 
@@ -96,15 +104,15 @@ It lets you try:
 
 - **Presets:** one-click combinations such as Editorial, Krash, Ember,
   Blueprint and Newsprint
-- **Palette:** Paper (default), Terminal (a dark, green Krash-inspired scheme),
-  Ember (coral complement), Cobalt (blue split-complement), Iris (violet
-  triadic) and Mono (ink on newsprint)
+- **Palette:** Terminal (current default, a green Krash-inspired scheme), Paper
+  (warm editorial), Ember (coral complement), Cobalt (blue split-complement),
+  Iris (violet triadic) and Mono (ink on newsprint)
 - **Mode:** light or dark
 - **Typography:** Editorial (Fraunces + Inter), Terminal (JetBrains Mono +
   Inter), Modern (Inter), Classic (Georgia + Inter) and Mono (JetBrains Mono)
 - **Texture:** soft radial washes, a dot grid or a flat colour
-- **Accent:** any custom colour; the tints, hover colour, focus rings and
-  contact-panel accent are derived automatically
+- **Accent:** any custom colour; the site ships with `#876DFE`, and the tints,
+  hover colour, focus rings and contact-panel accent are derived automatically
 
 Choices are saved in `localStorage` and applied before the page paints.
 **Reset all** returns to the defaults.

@@ -136,6 +136,15 @@
         texture: 'portfolio-texture'
     };
 
+    const DEFAULTS = window.__PORTFOLIO_DEFAULTS__ || {
+        palette: 'paper',
+        fonts: 'editorial',
+        texture: 'soft',
+        accent: ''
+    };
+
+    const ACCENT_PALETTE = 'palette';
+
     const PALETTES = [
         {
             id: 'paper',
@@ -278,10 +287,10 @@
 
     const designState = {
         theme: 'light',
-        palette: 'paper',
-        fonts: 'editorial',
-        texture: 'soft',
-        accent: ''
+        palette: DEFAULTS.palette || 'paper',
+        fonts: DEFAULTS.fonts || 'editorial',
+        texture: DEFAULTS.texture || 'soft',
+        accent: normalizeHex(DEFAULTS.accent) || ''
     };
 
     function readStorage(key) {
@@ -508,13 +517,13 @@
     }
 
     function clearCustomAccent(options = {}) {
-        const { persist = true, sync = true } = options;
+        const { persist = true, sync = true, storageValue = ACCENT_PALETTE } = options;
         designState.accent = '';
 
         ['--accent', '--accent-strong', '--accent-soft', '--accent-ink', '--accent-wash', '--panel-accent']
             .forEach((property) => root.style.removeProperty(property));
 
-        if (persist) removeStorage(DESIGN_STORAGE.accent);
+        if (persist) writeStorage(DESIGN_STORAGE.accent, storageValue);
         updateThemeColor();
         if (sync) syncDebugUI();
     }
@@ -575,15 +584,27 @@
     }
 
     function initDesignSettings() {
-        const savedPalette = readStorage(DESIGN_STORAGE.palette) || root.getAttribute('data-palette') || 'paper';
-        const savedFonts = readStorage(DESIGN_STORAGE.fonts) || root.getAttribute('data-fonts') || 'editorial';
-        const savedTexture = readStorage(DESIGN_STORAGE.texture) || root.getAttribute('data-texture') || 'soft';
+        const defaultPalette = PALETTES.some((item) => item.id === DEFAULTS.palette) ? DEFAULTS.palette : 'paper';
+        const defaultFonts = FONT_PAIRS.some((item) => item.id === DEFAULTS.fonts) ? DEFAULTS.fonts : 'editorial';
+        const defaultTexture = TEXTURES.some((item) => item.id === DEFAULTS.texture) ? DEFAULTS.texture : 'soft';
+        const defaultAccent = normalizeHex(DEFAULTS.accent);
+        const savedPalette = readStorage(DESIGN_STORAGE.palette);
+        const savedFonts = readStorage(DESIGN_STORAGE.fonts);
+        const savedTexture = readStorage(DESIGN_STORAGE.texture);
+        const savedAccent = readStorage(DESIGN_STORAGE.accent);
 
-        designState.palette = PALETTES.some((item) => item.id === savedPalette) ? savedPalette : 'paper';
-        designState.fonts = FONT_PAIRS.some((item) => item.id === savedFonts) ? savedFonts : 'editorial';
-        designState.texture = TEXTURES.some((item) => item.id === savedTexture) ? savedTexture : 'soft';
+        designState.palette = PALETTES.some((item) => item.id === savedPalette) ? savedPalette : defaultPalette;
+        designState.fonts = FONT_PAIRS.some((item) => item.id === savedFonts) ? savedFonts : defaultFonts;
+        designState.texture = TEXTURES.some((item) => item.id === savedTexture) ? savedTexture : defaultTexture;
         designState.theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-        designState.accent = normalizeHex(readStorage(DESIGN_STORAGE.accent));
+
+        if (savedAccent === ACCENT_PALETTE) {
+            designState.accent = '';
+        } else if (savedAccent) {
+            designState.accent = normalizeHex(savedAccent) || defaultAccent;
+        } else {
+            designState.accent = defaultAccent;
+        }
 
         root.setAttribute('data-palette', designState.palette);
         root.setAttribute('data-fonts', designState.fonts);
@@ -594,7 +615,7 @@
         if (designState.accent) {
             applyCustomAccent(designState.accent, { persist: false, sync: false });
         } else {
-            clearCustomAccent({ persist: true, sync: false });
+            clearCustomAccent({ persist: false, sync: false });
         }
 
         updateThemeColor();
@@ -614,15 +635,24 @@
 
     function resetDesign() {
         Object.values(DESIGN_STORAGE).forEach(removeStorage);
+
+        const defaultPalette = PALETTES.some((item) => item.id === DEFAULTS.palette) ? DEFAULTS.palette : 'paper';
+        const defaultFonts = FONT_PAIRS.some((item) => item.id === DEFAULTS.fonts) ? DEFAULTS.fonts : 'editorial';
+        const defaultTexture = TEXTURES.some((item) => item.id === DEFAULTS.texture) ? DEFAULTS.texture : 'soft';
+        const defaultAccent = normalizeHex(DEFAULTS.accent);
+
         designState.accent = '';
         clearCustomAccent({ persist: false, sync: false });
-        applyPalette('paper', { persist: false, clearAccent: false, sync: false });
-        applyFonts('editorial', { persist: false, sync: false });
-        applyTexture('soft', { persist: false, sync: false });
+        applyPalette(defaultPalette, { persist: false, clearAccent: false, sync: false });
+        applyFonts(defaultFonts, { persist: false, sync: false });
+        applyTexture(defaultTexture, { persist: false, sync: false });
         applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light', {
             persist: false,
             sync: false
         });
+        if (defaultAccent) {
+            applyCustomAccent(defaultAccent, { persist: false, sync: false });
+        }
         syncDebugUI();
     }
 
