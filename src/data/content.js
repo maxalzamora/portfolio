@@ -1,21 +1,3 @@
-/* ============================================================================
-   MAX ALZAMORA — PORTFOLIO CONTENT
-   ----------------------------------------------------------------------------
-   This is the only file you need to edit for day-to-day changes.
-
-   Tips:
-   • English lives in `window.PORTFOLIO`; Spanish and Catalan live in
-     `window.PORTFOLIO_LANGUAGES` at the bottom of this file.
-   • Each language is a complete copy, including links and interface strings.
-     Update shared details in all three language objects.
-   • Paragraph fields accept normal HTML, so <strong>bold</strong> works.
-   • Add a project by copying an object inside `projects.categories[].projects`.
-   • Add a skill by adding a string to `skills.categories[].items`.
-   • Leave a link as "" to hide that button.
-   • The contact form uses a mailto: fallback while `contact.form.action` is "".
-     Paste a Formspree endpoint there if you want AJAX form submissions.
-   ============================================================================ */
-
 window.PORTFOLIO = {
   meta: {
     title: "Max Alzamora — Junior Backend Developer",
@@ -179,6 +161,26 @@ window.PORTFOLIO = {
               "MySQL"
             ]
           },
+          {
+            name: "Cyanofy",
+            type: "Spring Boot application",
+            year: "2026",
+            description:
+              "A Spring Boot application that turns a photograph into the digital negative you print on transparency for a cyanotype contact print. I built it for my partner, who teaches cyanotype workshops and kept finding most negative-making tools behind a paywall, so it handles the whole process without one: density-based tone mapping, 16-bit TIFF and page-sized PDF exports, a preview of the finished print, and calibration from a photographed print.",
+            image: "src/assets/projects/cyanotypes.webp",
+            imageAlt: "Cyanotypes — upload form and the Prussian-blue print preview it produces",
+            repo: "https://github.com/maxalzamora/cyanotype-maker",
+            live: "",
+            private: false,
+            showStats: false,
+            statsRepo: "maxalzamora/cyanotype-maker",
+            tech: [
+              "Java",
+              "Spring Boot",
+              "JUnit",
+              "PDFBox"
+            ]
+          }
         ]
       },
       {
