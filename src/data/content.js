@@ -47,11 +47,11 @@ window.PORTFOLIO = {
 
   hero: {
     eyebrow: "Junior Backend Developer · Barcelona",
-    titleBefore: "I build the ",
-    titleEmphasis: "quiet parts",
-    titleAfter: " of the web.",
+    titleBefore: "Where ",
+    titleEmphasis: " creativity ",
+    titleAfter: "becomes functionality.",
     description:
-      "I turn fuzzy requirements into clear data models, predictable endpoints and pages that load fast. Currently looking for my first backend role.",
+      "Backend developer focused on Java and Spring, with a background in graphic design and a passion for building things. I enjoy solving problems, working with data and turning ideas into functional software.",
     primaryCta: { label: "Explore my work", href: "#projects" },
     secondaryCta: { label: "Get in touch", href: "#contact" },
     image: "src/assets/profile.webp",
@@ -59,96 +59,95 @@ window.PORTFOLIO = {
     status: "Open to work",
     facts: [
       { label: "Based in", value: "Barcelona, Spain" },
-      { label: "Focus", value: "Python · Django · SQL" },
-      { label: "Learning", value: "Docker · APIs · CI/CD" }
+      { label: "Focus", value: "Java · Python · REST APIs" },
+      { label: "Background", value: "Design · Programming · Data" }
     ],
     profile: {
       name: "Max Alzamora",
       role: "Junior Backend Developer",
-      note: "I like small, well-tested systems that are easy to understand six months later.",
-      stack: ["Python", "Django", "MySQL", "pytest"],
-      availability: "Available for junior roles"
+      note: "A creative background, a technical mindset and a passion for building useful things.",
+      stack: ["Java", "Spring", "SQL", "Python"],
+      availability: "Open to junior backend opportunities"
     }
   },
 
   about: {
     kicker: "01 — About",
-    title: "Curious about the parts behind the screen.",
+    title: "Bridging Design, Data, and Code.",
     paragraphs: [
-      "I'm a backend developer based in <strong>Barcelona</strong>, focused on Python and Django. I enjoy turning fuzzy requirements into clear data models, predictable endpoints and pages that load fast.",
-      "My main project is <strong>SongTrove</strong>, a private chord-sheet library built with Django, MySQL and server-rendered templates. It covers authentication, per-user data, CRUD, search, a ChordPro parser, on-the-fly transposition and a print view. The test suite runs in CI on every push.",
-      "Right now I'm deepening my knowledge of <strong>SQL, testing, Docker and API design</strong>. I care about readable code, small commits and shipping things that work end to end."
+      "I studied <strong>music</strong> and <strong>graphic design</strong>, and spent over 10 years working as a graphic designer, mostly as a freelancer. Along the way, I developed an interest in <strong>web development</strong> and eventually started <strong>programming videogames</strong> as a self-taught developer.",
+      "More recently, I explored <strong>software testing</strong> and <strong>data analytics</strong> before discovering that <strong>backend development</strong> was where I wanted to focus. I completed backend training in Java and Spring, covering REST APIs, databases, Git and automated testing.",
+      "I'm now looking to grow as a backend developer, contribute to real projects and bring my creativity, problem-solving skills and professional experience into software development."
     ],
     principles: [
       {
-        title: "Readable first",
-        text: "Code is read more often than it is written. I optimise for the next person who has to change it."
+        title: "Creative problem-solving",
+        text: "A different perspective shaped by years of creative work and technical exploration."
       },
       {
-        title: "Test the edges",
-        text: "Happy paths are easy. I care about permissions, empty states and the awkward cases in between."
+        title: "Attention to detail",
+        text: "A professional habit developed through over a decade of design work."
       },
       {
-        title: "Ship small",
-        text: "Small commits, clear migrations and a working deploy beat a perfect branch that never lands."
+        title: "Independent learning",
+        text: "Comfortable exploring new technologies, researching solutions and learning by building."
       }
     ],
     now: {
       title: "Currently",
-      text: "Going deeper into SQL, testing and the bits between the code and the server.",
-      items: ["Docker", "PostgreSQL", "REST API design", "CI/CD"]
+      text: "Building on my backend development foundations through personal projects and continued practice.",
+      items: ["Docker", "PostgreSQL", "Test Automation"]
     }
   },
 
   skills: {
     kicker: "02 — Skills",
-    title: "Tools I reach for.",
-    note: "A practical stack, built through projects rather than tutorials.",
+    title: "A growing technical toolkit.",
+    note: "Built through formal training, hands-on projects and professional experience.",
     categories: [
       {
-        title: "Languages",
-        items: ["Python", "SQL", "JavaScript", "HTML5", "CSS3", "Bash"]
-      },
-      {
         title: "Backend",
-        items: [
-          "Django",
-          "Django ORM",
-          "REST APIs",
-          "Authentication",
-          "Sessions",
-          "Server-rendered templates",
-          "CRUD",
-          "Form validation"
-        ]
+        items: ["Java", "Spring", "REST APIs", "JPA/Hibernate", "Python"]
       },
       {
         title: "Databases",
-        items: ["MySQL", "SQLite", "Relational modelling", "Queries & indexes"]
-      },
-      {
-        title: "Testing & tooling",
         items: [
-          "pytest",
-          "pytest-django",
-          "Coverage",
-          "Git",
-          "GitHub Actions",
-          "Linux"
+          "SQL",
+          "PostgreSQL",
+          "MySQL"
         ]
       },
       {
-        title: "Deployment",
+        title: "Testing & Tools",
+        items: ["JUnit", "Test Automation", "Git"]
+      },
+      {
+        title: "Data & Analytics",
         items: [
-          "PythonAnywhere",
-          "WhiteNoise",
-          "Environment variables",
-          "GitHub Pages"
+          "Pandas",
+          "Power BI",
+          "Excel",
+          "Scikit-learn",
+          "Matplotlib",
+          "Seaborn"
         ]
       },
       {
-        title: "Currently learning",
-        items: ["Docker", "PostgreSQL", "REST API design", "CI/CD"]
+        title: "Frontend",
+        items: [
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Wordpress"
+        ]
+      },
+      {
+        title: "Softskills",
+        items: ["Independent learning", "Creativity", "Attention to detail", "Adaptability", "Organization"]
+      },
+      {
+        title: "Languages",
+        items: ["Catalan — Native", "Spanish — Native", "English — C1"]
       }
     ]
   },
@@ -166,38 +165,20 @@ window.PORTFOLIO = {
             type: "Django application",
             year: "2026",
             description:
-              "A private chord-sheet library for the songs you actually play. Built with Django and MySQL, it handles sign-up and login, per-user libraries, CRUD, search and filters, ChordPro and plain-text imports, on-the-fly transposition, capo arithmetic and a clean print view. The test suite covers the parser, views and permissions, runs at 98% coverage, and is checked in CI on every push.",
+              "A Django web application born out of the need for a centralized, clutter-free songbook with exactly the features I wanted. It includes user accounts, personal libraries, song management, search and filters, on-the-fly chord transposition, capo calculations and a clean print view.",
             image: "src/assets/projects/songtrove.webp",
             imageAlt: "SongTrove — chord sheet library in dark mode",
             repo: "https://github.com/maxalzamora/songtrove",
-            live: "",
+            live: "https://songtrove.pythonanywhere.com/",
             private: false,
             showStats: false,
             statsRepo: "maxalzamora/songtrove",
             tech: [
               "Python",
               "Django",
-              "MySQL",
-              "PyMySQL",
-              "pytest",
-              "GitHub Actions"
+              "MySQL"
             ]
           },
-          {
-            name: "Portfolio",
-            type: "Static site",
-            year: "2026",
-            description:
-              "This site. A content-first portfolio built with vanilla HTML, CSS and JavaScript. Every section is rendered from one editable data file, there is no framework or build step, and it deploys straight to GitHub Pages.",
-            image: "src/assets/projects/portfolio.webp",
-            imageAlt: "Max Alzamora — portfolio website",
-            repo: "https://github.com/maxalzamora/portfolio",
-            live: "https://maxalzamora.github.io/portfolio/",
-            private: false,
-            showStats: false,
-            statsRepo: "maxalzamora/portfolio",
-            tech: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"]
-          }
         ]
       },
       {
@@ -208,20 +189,19 @@ window.PORTFOLIO = {
             type: "Installable PWA",
             year: "2026",
             description:
-              "A small boxing round timer that calls punch combinations out loud while you train. Three 3-minute rounds, voice cues in English and Catalan, a synthesized bell, fullscreen, wake lock and offline support. Installable as a PWA with no dependencies or build step.",
+              "A lightweight boxing training app built for a friend who wanted a distraction-free way to train. It features three-minute rounds, spoken punch combinations in English and Catalan, synthesized bell sounds, fullscreen mode, wake lock and offline support.",
             image: "src/assets/projects/six-count.webp",
             imageAlt: "Six Count — boxing round timer app",
             repo: "https://github.com/maxalzamora/boxingapp",
-            live: "",
+            live: "https://maxalzamora.github.io/boxingapp/",
             private: false,
             showStats: false,
             statsRepo: "maxalzamora/boxingapp",
             tech: [
               "JavaScript",
-              "Web Speech API",
-              "Web Audio API",
-              "Service Worker",
-              "PWA"
+              "HTML",
+              "CSS",
+              "Web APIs"
             ]
           }
         ]
@@ -231,22 +211,19 @@ window.PORTFOLIO = {
 
   contact: {
     kicker: "04 — Contact",
-    title: "Let's build something that works.",
+    title: "Let's build something together.",
     description:
-      "I'm looking for a junior backend role where I can learn from people who care about the craft. If that sounds like your team, say hello.",
-    note: "Usually replies within a day or two.",
+      "I'm looking for junior backend opportunities where I can contribute, grow and put my skills into practice. Let's talk!",
+    note: "Always happy to connect and talk about opportunities.",
     form: {
-      // Leave empty to open the visitor's email app (mailto fallback).
-      // Paste a Formspree endpoint such as https://formspree.io/f/xxxxxxx
-      // here to use AJAX submission instead.
       action: "",
       submitLabel: "Send message"
     },
     links: [
       {
         label: "Email",
-        value: "37882827+maxalzamora@users.noreply.github.com",
-        href: "mailto:37882827+maxalzamora@users.noreply.github.com",
+        value: "maxalzamorawork@gmail.com",
+        href: "mailto:maxalzamorawork@gmail.com",
         icon: "email"
       },
       {
@@ -254,9 +231,14 @@ window.PORTFOLIO = {
         value: "github.com/maxalzamora",
         href: "https://github.com/maxalzamora",
         icon: "github"
-      }
-      // Add LinkedIn (or any other link) when you have one:
-      // { label: "LinkedIn", value: "linkedin.com/in/your-handle", href: "https://www.linkedin.com/in/your-handle/", icon: "linkedin" }
+      },
+      {
+        label: "Linkedin",
+        value: "linkedin.com/in/maxalzamora",
+        href: "https://www.linkedin.com/in/maxalzamora/",
+        icon: "linkedin"
+      },
+
     ]
   },
 
