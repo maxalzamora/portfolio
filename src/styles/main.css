@@ -762,6 +762,14 @@ button {
     background: var(--bg-elev);
 }
 
+.inline-link {
+    color: #9286c7;
+}
+
+.inline-link:hover {
+    text-decoration-thickness: 2px;
+}
+
 /* Reveal-on-scroll is opt-in only when JavaScript is available. */
 .js .reveal {
     opacity: 0;

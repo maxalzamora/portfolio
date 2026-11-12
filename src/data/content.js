@@ -166,7 +166,7 @@ window.PORTFOLIO = {
             type: "Spring Boot application",
             year: "2026",
             description:
-              "A Spring Boot application that turns a photograph into the digital negative you print on transparency for a cyanotype contact print. I built it for my partner, who teaches cyanotype workshops and kept finding most negative-making tools behind a paywall, so it handles the whole process without one: density-based tone mapping, 16-bit TIFF and page-sized PDF exports, a preview of the finished print, and calibration from a photographed print.",
+              "A Spring Boot application that turns a photograph into the digital negative you print on transparency for a <a class='inline-link' href='https://en.wikipedia.org/wiki/Cyanotype' target='_blank' rel='noopener noreferrer'>cyanotype</a> contact print. I built it for my partner, who teaches cyanotype workshops and kept finding most negative-making tools behind a paywall, so it handles the whole process without one: density-based tone mapping, 16-bit TIFF and page-sized PDF exports, a preview of the finished print, and calibration from a photographed print.",
             image: "src/assets/projects/cyanotypes.webp",
             imageAlt: "Cyanotypes — upload form and the Prussian-blue print preview it produces",
             repo: "https://github.com/maxalzamora/cyanotype-maker",
@@ -338,10 +338,10 @@ window.PORTFOLIO_LANGUAGES = {
     ],
     "hero": {
       "eyebrow": "Desarrollador Backend Junior · Barcelona",
-      "titleBefore": "Construyo las ",
-      "titleEmphasis": "partes silenciosas",
-      "titleAfter": " de la web.",
-      "description": "Convierto requisitos difusos en modelos de datos claros, endpoints predecibles y páginas que cargan rápido. Ahora mismo busco mi primer puesto en backend.",
+      "titleBefore": "Donde la ",
+      "titleEmphasis": " creatividad ",
+      "titleAfter": "se vuelve funcionalidad.",
+      "description": "Desarrollador backend centrado en Java y Spring, con formación en diseño gráfico y pasión por construir cosas. Me gusta resolver problemas, trabajar con datos y convertir ideas en software funcional.",
       "primaryCta": {
         "label": "Explora mi trabajo",
         "href": "#projects"
@@ -360,131 +360,132 @@ window.PORTFOLIO_LANGUAGES = {
         },
         {
           "label": "Enfoque",
-          "value": "Python · Django · SQL"
+          "value": "Java · Python · APIs REST"
         },
         {
-          "label": "Aprendiendo",
-          "value": "Docker · APIs · CI/CD"
+          "label": "Trayectoria",
+          "value": "Diseño · Programación · Datos"
         }
       ],
       "profile": {
         "name": "Max Alzamora",
         "role": "Desarrollador Backend Junior",
-        "note": "Me gustan los sistemas pequeños y bien testeados que se entienden fácilmente seis meses después.",
+        "note": "Una trayectoria creativa, una mentalidad técnica y pasión por construir cosas útiles.",
         "stack": [
-          "Python",
-          "Django",
-          "MySQL",
-          "pytest"
+          "Java",
+          "Spring",
+          "SQL",
+          "Python"
         ],
-        "availability": "Disponible para puestos junior"
+        "availability": "Abierto a oportunidades de backend junior"
       }
     },
     "about": {
       "kicker": "01 — Sobre mí",
-      "title": "Curioso por las partes que hay detrás de la pantalla.",
+      "title": "Uniendo diseño, datos y código.",
       "paragraphs": [
-        "Soy un desarrollador backend que vive en <strong>Barcelona</strong>, centrado en Python y Django. Disfruto convirtiendo requisitos difusos en modelos de datos claros, endpoints predecibles y páginas que cargan rápido.",
-        "Mi proyecto principal es <strong>SongTrove</strong>, una biblioteca privada de hojas de acordes creada con Django, MySQL y plantillas renderizadas en el servidor. Cubre autenticación, datos por usuario, CRUD, búsqueda, un parser de ChordPro, transposición al vuelo y una vista de impresión. La suite de tests se ejecuta en CI en cada push.",
-        "Ahora mismo estoy profundizando en <strong>SQL, testing, Docker y diseño de APIs</strong>. Me importa el código legible, los commits pequeños y entregar cosas que funcionen de principio a fin."
+        "Estudié <strong>música</strong> y <strong>diseño gráfico</strong>, y pasé más de 10 años trabajando como diseñador gráfico, sobre todo como freelance. Por el camino, me interesé por el <strong>desarrollo web</strong> y acabé empezando a <strong>programar videojuegos</strong> como desarrollador autodidacta.",
+        "Más recientemente, he explorado el <strong>testing de software</strong> y el <strong>análisis de datos</strong> antes de descubrir que el <strong>desarrollo backend</strong> era en lo que quería centrarme. He completado una formación backend en Java y Spring, cubriendo APIs REST, bases de datos, Git y testing automatizado.",
+        "Ahora busco crecer como desarrollador backend, contribuir a proyectos reales y aportar mi creatividad, mi capacidad de resolución de problemas y mi experiencia profesional al desarrollo de software."
       ],
       "principles": [
         {
-          "title": "Primero, legible",
-          "text": "El código se lee más a menudo de lo que se escribe. Optimizo para la siguiente persona que tenga que cambiarlo."
+          "title": "Resolución creativa de problemas",
+          "text": "Una perspectiva diferente, forjada por años de trabajo creativo y exploración técnica."
         },
         {
-          "title": "Prueba los bordes",
-          "text": "Los caminos felices son fáciles. Me importan los permisos, los estados vacíos y los casos incómodos intermedios."
+          "title": "Atención al detalle",
+          "text": "Un hábito profesional desarrollado a lo largo de más de una década de trabajo en diseño."
         },
         {
-          "title": "Entrega en pequeño",
-          "text": "Commits pequeños, migraciones claras y un despliegue que funciona superan una rama perfecta que nunca llega a producción."
+          "title": "Aprendizaje autónomo",
+          "text": "Cómodo explorando nuevas tecnologías, investigando soluciones y aprendiendo construyendo."
         }
       ],
       "now": {
         "title": "Actualmente",
-        "text": "Profundizando en SQL, testing y las piezas entre el código y el servidor.",
+        "text": "Afianzando mis bases de desarrollo backend con proyectos personales y práctica continua.",
         "items": [
           "Docker",
           "PostgreSQL",
-          "Diseño de APIs REST",
-          "CI/CD"
+          "Automatización de pruebas"
         ]
       }
     },
     "skills": {
       "kicker": "02 — Habilidades",
-      "title": "Herramientas que uso.",
-      "note": "Un stack práctico, construido con proyectos más que con tutoriales.",
+      "title": "Un conjunto de herramientas técnicas en crecimiento.",
+      "note": "Construido a través de formación reglada, proyectos prácticos y experiencia profesional.",
       "categories": [
-        {
-          "title": "Lenguajes",
-          "items": [
-            "Python",
-            "SQL",
-            "JavaScript",
-            "HTML5",
-            "CSS3",
-            "Bash"
-          ]
-        },
         {
           "title": "Backend",
           "items": [
-            "Django",
-            "Django ORM",
+            "Java",
+            "Spring",
             "APIs REST",
-            "Autenticación",
-            "Sesiones",
-            "Plantillas renderizadas en el servidor",
-            "CRUD",
-            "Validación de formularios"
+            "JPA/Hibernate",
+            "Python"
           ]
         },
         {
           "title": "Bases de datos",
           "items": [
-            "MySQL",
-            "SQLite",
-            "Modelado relacional",
-            "Consultas e índices"
+            "SQL",
+            "PostgreSQL",
+            "MySQL"
           ]
         },
         {
           "title": "Testing y herramientas",
           "items": [
-            "pytest",
-            "pytest-django",
-            "Cobertura",
-            "Git",
-            "GitHub Actions",
-            "Linux"
+            "JUnit",
+            "Automatización de pruebas",
+            "Git"
           ]
         },
         {
-          "title": "Despliegue",
+          "title": "Datos y analítica",
           "items": [
-            "PythonAnywhere",
-            "WhiteNoise",
-            "Variables de entorno",
-            "GitHub Pages"
+            "Pandas",
+            "Power BI",
+            "Excel",
+            "Scikit-learn",
+            "Matplotlib",
+            "Seaborn"
           ]
         },
         {
-          "title": "Aprendiendo ahora",
+          "title": "Frontend",
           "items": [
-            "Docker",
-            "PostgreSQL",
-            "Diseño de APIs REST",
-            "CI/CD"
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Wordpress"
+          ]
+        },
+        {
+          "title": "Competencias transversales",
+          "items": [
+            "Aprendizaje autónomo",
+            "Creatividad",
+            "Atención al detalle",
+            "Adaptabilidad",
+            "Organización"
+          ]
+        },
+        {
+          "title": "Idiomas",
+          "items": [
+            "Catalán — Nativo",
+            "Español — Nativo",
+            "Inglés — C1"
           ]
         }
       ]
     },
     "projects": {
       "kicker": "03 — Proyectos",
-      "title": "Trabajo seleccionado.",
+      "title": "Proyectos elegidos.",
       "note": "Tres proyectos que muestran cómo pienso, construyo y pruebo.",
       "categories": [
         {
@@ -494,40 +495,37 @@ window.PORTFOLIO_LANGUAGES = {
               "name": "SongTrove",
               "type": "Aplicación Django",
               "year": "2026",
-              "description": "Una biblioteca privada de hojas de acordes para las canciones que de verdad tocas. Creada con Django y MySQL, gestiona registro e inicio de sesión, bibliotecas por usuario, CRUD, búsqueda y filtros, importación de ChordPro y texto plano, transposición al vuelo, aritmética de cejilla y una vista de impresión limpia. La suite de tests cubre el parser, las vistas y los permisos, alcanza el 98% de cobertura y se comprueba en CI en cada push.",
+              "description": "Una aplicación web en Django que nació de la necesidad de tener un cancionero centralizado, con exactamente las funciones que quería. Incluye cuentas de usuario, bibliotecas personales, gestión de canciones, búsqueda y filtros, transposición de acordes al vuelo, cálculo de cejilla y una vista de impresión limpia.",
               "image": "src/assets/projects/songtrove.webp",
               "imageAlt": "SongTrove — biblioteca de hojas de acordes en modo oscuro",
               "repo": "https://github.com/maxalzamora/songtrove",
-              "live": "",
+              "live": "https://songtrove.pythonanywhere.com/",
               "private": false,
               "showStats": false,
               "statsRepo": "maxalzamora/songtrove",
               "tech": [
                 "Python",
                 "Django",
-                "MySQL",
-                "PyMySQL",
-                "pytest",
-                "GitHub Actions"
+                "MySQL"
               ]
             },
             {
-              "name": "Portfolio",
-              "type": "Sitio estático",
+              "name": "Cyanofy",
+              "type": "Aplicación Spring Boot",
               "year": "2026",
-              "description": "Este sitio. Un portfolio centrado en el contenido, creado con HTML, CSS y JavaScript vanilla. Cada sección se renderiza desde un único archivo de datos editable, no hay framework ni build step, y se despliega directamente en GitHub Pages.",
-              "image": "src/assets/projects/portfolio.webp",
-              "imageAlt": "Max Alzamora — sitio web del portfolio",
-              "repo": "https://github.com/maxalzamora/portfolio",
-              "live": "https://maxalzamora.github.io/portfolio/",
+              "description": "Una aplicación Spring Boot que convierte una fotografía en el negativo digital que se imprime en transparencia para hacer <a class='inline-link' href='https://es.wikipedia.org/wiki/Cianotipia' target='_blank' rel='noopener noreferrer'>cianotipos</a>. La construí para mi pareja, que imparte talleres de cianotipia y se encontraba con que casi todas las herramientas para crear negativos eran de pago, así que esta cubre todo el proceso sin necesidad de ello: mapeo de tonos basado en la densidad, exportación en TIFF de 16 bits y PDF al tamaño de página, una previsualización de la copia final y calibración a partir de una copia fotografiada.",
+              "image": "src/assets/projects/cyanotypes.webp",
+              "imageAlt": "Cyanotypes — formulario de subida y la previsualización en azul de Prusia de la copia que genera",
+              "repo": "https://github.com/maxalzamora/cyanotype-maker",
+              "live": "",
               "private": false,
               "showStats": false,
-              "statsRepo": "maxalzamora/portfolio",
+              "statsRepo": "maxalzamora/cyanotype-maker",
               "tech": [
-                "HTML5",
-                "CSS3",
-                "JavaScript",
-                "GitHub Pages"
+                "Java",
+                "Spring Boot",
+                "JUnit",
+                "PDFBox"
               ]
             }
           ]
@@ -539,20 +537,19 @@ window.PORTFOLIO_LANGUAGES = {
               "name": "Six Count",
               "type": "PWA instalable",
               "year": "2026",
-              "description": "Un pequeño temporizador de asaltos de boxeo que canta combinaciones de golpes en voz alta mientras entrenas. Tres asaltos de 3 minutos, indicaciones de voz en inglés y catalán, una campana sintetizada, pantalla completa, wake lock y soporte offline. Instalable como PWA sin dependencias ni build step.",
+              "description": "Una aplicación ligera de entrenamiento de boxeo creada para una amiga que quería entrenar sin distracciones. Incluye asaltos de tres minutos, combinaciones de golpes anunciadas en voz alta en inglés y catalán, sonidos de campana sintetizados, modo de pantalla completa, wake lock y soporte offline.",
               "image": "src/assets/projects/six-count.webp",
               "imageAlt": "Six Count — aplicación temporizador de asaltos de boxeo",
               "repo": "https://github.com/maxalzamora/boxingapp",
-              "live": "",
+              "live": "https://maxalzamora.github.io/boxingapp/",
               "private": false,
               "showStats": false,
               "statsRepo": "maxalzamora/boxingapp",
               "tech": [
                 "JavaScript",
-                "Web Speech API",
-                "Web Audio API",
-                "Service Worker",
-                "PWA"
+                "HTML",
+                "CSS",
+                "Web APIs"
               ]
             }
           ]
@@ -561,9 +558,9 @@ window.PORTFOLIO_LANGUAGES = {
     },
     "contact": {
       "kicker": "04 — Contacto",
-      "title": "Construyamos algo que funcione.",
-      "description": "Busco un puesto backend junior donde pueda aprender de gente a la que le importe el oficio. Si eso suena a tu equipo, escríbeme.",
-      "note": "Normalmente respondo en un día o dos.",
+      "title": "Construyamos algo juntos.",
+      "description": "Busco oportunidades de backend junior donde pueda aportar, crecer y poner en práctica mis habilidades. ¡Hablemos!",
+      "note": "Siempre es un placer conectar y hablar de oportunidades.",
       "form": {
         "action": "",
         "submitLabel": "Enviar mensaje"
@@ -571,8 +568,8 @@ window.PORTFOLIO_LANGUAGES = {
       "links": [
         {
           "label": "Correo",
-          "value": "37882827+maxalzamora@users.noreply.github.com",
-          "href": "mailto:37882827+maxalzamora@users.noreply.github.com",
+          "value": "maxalzamorawork@gmail.com",
+          "href": "mailto:maxalzamorawork@gmail.com",
           "icon": "email"
         },
         {
@@ -580,6 +577,12 @@ window.PORTFOLIO_LANGUAGES = {
           "value": "github.com/maxalzamora",
           "href": "https://github.com/maxalzamora",
           "icon": "github"
+        },
+        {
+          "label": "Linkedin",
+          "value": "linkedin.com/in/maxalzamora",
+          "href": "https://www.linkedin.com/in/maxalzamora/",
+          "icon": "linkedin"
         }
       ]
     },
@@ -666,10 +669,10 @@ window.PORTFOLIO_LANGUAGES = {
     ],
     "hero": {
       "eyebrow": "Desenvolupador Backend Junior · Barcelona",
-      "titleBefore": "Construeixo les ",
-      "titleEmphasis": "parts silencioses",
-      "titleAfter": " de la web.",
-      "description": "Transformo requisits difusos en models de dades clars, endpoints previsibles i pàgines que carreguen ràpid. Ara mateix busco la meva primera feina en backend.",
+      "titleBefore": "On la ",
+      "titleEmphasis": " creativitat ",
+      "titleAfter": "esdevé funcionalitat.",
+      "description": "Desenvolupador backend centrat en Java i Spring, amb formació en disseny gràfic i passió per construir coses. M'agrada resoldre problemes, treballar amb dades i convertir idees en programari funcional.",
       "primaryCta": {
         "label": "Explora la meva feina",
         "href": "#projects"
@@ -688,131 +691,132 @@ window.PORTFOLIO_LANGUAGES = {
         },
         {
           "label": "Enfocament",
-          "value": "Python · Django · SQL"
+          "value": "Java · Python · APIs REST"
         },
         {
-          "label": "Aprenent",
-          "value": "Docker · APIs · CI/CD"
+          "label": "Trajectòria",
+          "value": "Disseny · Programació · Dades"
         }
       ],
       "profile": {
         "name": "Max Alzamora",
         "role": "Desenvolupador Backend Junior",
-        "note": "M'agraden els sistemes petits i ben testejats que s'entenen fàcilment sis mesos després.",
+        "note": "Una trajectòria creativa, una mentalitat tècnica i passió per construir coses útils.",
         "stack": [
-          "Python",
-          "Django",
-          "MySQL",
-          "pytest"
+          "Java",
+          "Spring",
+          "SQL",
+          "Python"
         ],
-        "availability": "Disponible per a llocs junior"
+        "availability": "Obert a oportunitats de backend junior"
       }
     },
     "about": {
       "kicker": "01 — Sobre mi",
-      "title": "Curiós per les parts que hi ha darrere de la pantalla.",
+      "title": "Unint disseny, dades i codi.",
       "paragraphs": [
-        "Sóc un desenvolupador backend que viu a <strong>Barcelona</strong>, centrat en Python i Django. M'agrada convertir requisits difusos en models de dades clars, endpoints previsibles i pàgines que carreguen ràpid.",
-        "El meu projecte principal és <strong>SongTrove</strong>, una biblioteca privada de fulls d'acords creada amb Django, MySQL i plantilles renderitzades al servidor. Cobreix autenticació, dades per usuari, CRUD, cerca, un parser de ChordPro, transposició al vol i una vista d'impressió. La suite de tests s'executa a CI a cada push.",
-        "Ara mateix estic aprofundint en <strong>SQL, testing, Docker i disseny d'APIs</strong>. M'importa el codi llegible, els commits petits i lliurar coses que funcionin de principi a fi."
+        "Vaig estudiar <strong>música</strong> i <strong>disseny gràfic</strong>, i vaig passar més de 10 anys treballant com a dissenyador gràfic, sobretot com a freelance. Pel camí, em vaig interessar pel <strong>desenvolupament web</strong> i vaig acabar començant a <strong>programar videojocs</strong> com a desenvolupador autodidacte.",
+        "Més recentment, he explorat el <strong>testing de software</strong> i l'<strong>anàlisi de dades</strong> abans de descobrir que el <strong>desenvolupament backend</strong> era en el que volia centrar-me. He completat una formació backend en Java i Spring, cobrint APIs REST, bases de dades, Git i testing automatitzat.",
+        "Ara busco créixer com a desenvolupador backend, contribuir a projectes reals i aportar la meva creativitat, la meva capacitat de resolució de problemes i la meva experiència professional al desenvolupament de programari."
       ],
       "principles": [
         {
-          "title": "Primer, llegible",
-          "text": "El codi es llegeix més sovint del que s'escriu. Optimitzo per a la següent persona que l'hagi de canviar."
+          "title": "Resolució creativa de problemes",
+          "text": "Una perspectiva diferent, forjada per anys de treball creatiu i exploració tècnica."
         },
         {
-          "title": "Prova les vores",
-          "text": "Els camins feliços són fàcils. M'importen els permisos, els estats buits i els casos incòmodes entremig."
+          "title": "Atenció al detall",
+          "text": "Un hàbit professional desenvolupat al llarg de més d'una dècada de treball en disseny."
         },
         {
-          "title": "Lliura en petit",
-          "text": "Commits petits, migracions clares i un desplegament que funciona superen una branca perfecta que mai arriba a producció."
+          "title": "Aprenentatge autònom",
+          "text": "Còmode explorant noves tecnologies, investigant solucions i aprenent construint."
         }
       ],
       "now": {
         "title": "Actualment",
-        "text": "Aprofundint en SQL, testing i les peces entre el codi i el servidor.",
+        "text": "Consolidant les meves bases de desenvolupament backend amb projectes personals i pràctica contínua.",
         "items": [
           "Docker",
           "PostgreSQL",
-          "Disseny d'APIs REST",
-          "CI/CD"
+          "Automatització de proves"
         ]
       }
     },
     "skills": {
       "kicker": "02 — Habilitats",
-      "title": "Eines que faig servir.",
-      "note": "Un stack pràctic, construït amb projectes més que amb tutorials.",
+      "title": "Un conjunt d'eines tècniques en creixement.",
+      "note": "Construït a través de formació reglada, projectes pràctics i experiència professional.",
       "categories": [
-        {
-          "title": "Llenguatges",
-          "items": [
-            "Python",
-            "SQL",
-            "JavaScript",
-            "HTML5",
-            "CSS3",
-            "Bash"
-          ]
-        },
         {
           "title": "Backend",
           "items": [
-            "Django",
-            "Django ORM",
+            "Java",
+            "Spring",
             "APIs REST",
-            "Autenticació",
-            "Sessions",
-            "Plantilles renderitzades al servidor",
-            "CRUD",
-            "Validació de formularis"
+            "JPA/Hibernate",
+            "Python"
           ]
         },
         {
           "title": "Bases de dades",
           "items": [
-            "MySQL",
-            "SQLite",
-            "Modelatge relacional",
-            "Consultes i índexs"
+            "SQL",
+            "PostgreSQL",
+            "MySQL"
           ]
         },
         {
           "title": "Testing i eines",
           "items": [
-            "pytest",
-            "pytest-django",
-            "Cobertura",
-            "Git",
-            "GitHub Actions",
-            "Linux"
+            "JUnit",
+            "Automatització de proves",
+            "Git"
           ]
         },
         {
-          "title": "Desplegament",
+          "title": "Dades i analítica",
           "items": [
-            "PythonAnywhere",
-            "WhiteNoise",
-            "Variables d'entorn",
-            "GitHub Pages"
+            "Pandas",
+            "Power BI",
+            "Excel",
+            "Scikit-learn",
+            "Matplotlib",
+            "Seaborn"
           ]
         },
         {
-          "title": "Aprenent ara",
+          "title": "Frontend",
           "items": [
-            "Docker",
-            "PostgreSQL",
-            "Disseny d'APIs REST",
-            "CI/CD"
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Wordpress"
+          ]
+        },
+        {
+          "title": "Competències transversals",
+          "items": [
+            "Aprenentatge autònom",
+            "Creativitat",
+            "Atenció al detall",
+            "Adaptabilitat",
+            "Organització"
+          ]
+        },
+        {
+          "title": "Idiomes",
+          "items": [
+            "Català — Natiu",
+            "Castellà — Natiu",
+            "Anglès — C1"
           ]
         }
       ]
     },
     "projects": {
       "kicker": "03 — Projectes",
-      "title": "Feina seleccionada.",
+      "title": "Projectes escollits.",
       "note": "Tres projectes que mostren com penso, construeixo i provo.",
       "categories": [
         {
@@ -822,40 +826,37 @@ window.PORTFOLIO_LANGUAGES = {
               "name": "SongTrove",
               "type": "Aplicació Django",
               "year": "2026",
-              "description": "Una biblioteca privada de fulls d'acords per a les cançons que realment toques. Creada amb Django i MySQL, gestiona registre i inici de sessió, biblioteques per usuari, CRUD, cerca i filtres, importació de ChordPro i text pla, transposició al vol, aritmètica del capot i una vista d'impressió neta. La suite de tests cobreix el parser, les vistes i els permisos, arriba al 98% de cobertura i es comprova a CI a cada push.",
+              "description": "Una aplicació web en Django que va néixer de la necessitat de tenir un cançoner centralitzat, amb exactament les funcions que volia. Inclou comptes d'usuari, biblioteques personals, gestió de cançons, cerca i filtres, transposició d'acords al vol, càlcul del capo i una vista d'impressió neta.",
               "image": "src/assets/projects/songtrove.webp",
               "imageAlt": "SongTrove — biblioteca de fulls d'acords en mode fosc",
               "repo": "https://github.com/maxalzamora/songtrove",
-              "live": "",
+              "live": "https://songtrove.pythonanywhere.com/",
               "private": false,
               "showStats": false,
               "statsRepo": "maxalzamora/songtrove",
               "tech": [
                 "Python",
                 "Django",
-                "MySQL",
-                "PyMySQL",
-                "pytest",
-                "GitHub Actions"
+                "MySQL"
               ]
             },
             {
-              "name": "Portfolio",
-              "type": "Lloc estàtic",
+              "name": "Cyanofy",
+              "type": "Aplicació Spring Boot",
               "year": "2026",
-              "description": "Aquest lloc. Un portfolio centrat en el contingut, creat amb HTML, CSS i JavaScript vanilla. Cada secció es renderitza des d'un únic fitxer de dades editable, no hi ha framework ni build step, i es desplega directament a GitHub Pages.",
-              "image": "src/assets/projects/portfolio.webp",
-              "imageAlt": "Max Alzamora — lloc web del portfolio",
-              "repo": "https://github.com/maxalzamora/portfolio",
-              "live": "https://maxalzamora.github.io/portfolio/",
+              "description": "Una aplicació Spring Boot que converteix una fotografia en el negatiu digital que s'imprimeix en transparència per a poder fer <a class='inline-link' href='https://ca.wikipedia.org/wiki/Cianot%C3%ADpia' target='_blank' rel='noopener noreferrer'>cianotips</a>. La vaig construir per a la meva parella, que imparteix tallers de cianotipia i es trobava que gairebé totes les eines per crear negatius eren de pagament, així que aquesta cobreix tot el procés sense necessitat de tenir-ne: mapatge de tons basat en la densitat, exportació en TIFF de 16 bits i PDF a la mida de pàgina, una previsualització de la còpia final i calibratge a partir d'una còpia fotografiada.",
+              "image": "src/assets/projects/cyanotypes.webp",
+              "imageAlt": "Cyanotypes — formulari de pujada i la previsualització en blau de Prússia de la còpia que genera",
+              "repo": "https://github.com/maxalzamora/cyanotype-maker",
+              "live": "",
               "private": false,
               "showStats": false,
-              "statsRepo": "maxalzamora/portfolio",
+              "statsRepo": "maxalzamora/cyanotype-maker",
               "tech": [
-                "HTML5",
-                "CSS3",
-                "JavaScript",
-                "GitHub Pages"
+                "Java",
+                "Spring Boot",
+                "JUnit",
+                "PDFBox"
               ]
             }
           ]
@@ -867,20 +868,19 @@ window.PORTFOLIO_LANGUAGES = {
               "name": "Six Count",
               "type": "PWA instal·lable",
               "year": "2026",
-              "description": "Un petit temporitzador d'assalts de boxa que canta combinacions de cops en veu alta mentre entrenes. Tres assalts de 3 minuts, indicacions de veu en anglès i català, una campana sintetitzada, pantalla completa, wake lock i suport offline. Instal·lable com a PWA sense dependències ni build step.",
+              "description": "Una aplicació lleugera d'entrenament de boxa creada per a una amiga que volia entrenar sense distraccions. Inclou assalts de tres minuts, combinacions de cops anunciades en veu alta en anglès i català, sons de campana sintetitzats, mode de pantalla completa, wake lock i suport offline.",
               "image": "src/assets/projects/six-count.webp",
               "imageAlt": "Six Count — aplicació temporitzador d'assalts de boxa",
               "repo": "https://github.com/maxalzamora/boxingapp",
-              "live": "",
+              "live": "https://maxalzamora.github.io/boxingapp/",
               "private": false,
               "showStats": false,
               "statsRepo": "maxalzamora/boxingapp",
               "tech": [
                 "JavaScript",
-                "Web Speech API",
-                "Web Audio API",
-                "Service Worker",
-                "PWA"
+                "HTML",
+                "CSS",
+                "Web APIs"
               ]
             }
           ]
@@ -889,9 +889,9 @@ window.PORTFOLIO_LANGUAGES = {
     },
     "contact": {
       "kicker": "04 — Contacte",
-      "title": "Construïm alguna cosa que funcioni.",
-      "description": "Busco una feina backend junior on pugui aprendre de gent a qui li importi l'ofici. Si això sona al teu equip, escriu-me.",
-      "note": "Normalment responc en un dia o dos.",
+      "title": "Construïm alguna cosa junts.",
+      "description": "Busco oportunitats de backend junior on pugui aportar, créixer i posar en pràctica les meves habilitats. Parlem!",
+      "note": "Sempre és un plaer connectar i parlar d'oportunitats.",
       "form": {
         "action": "",
         "submitLabel": "Enviar missatge"
@@ -899,8 +899,8 @@ window.PORTFOLIO_LANGUAGES = {
       "links": [
         {
           "label": "Correu",
-          "value": "37882827+maxalzamora@users.noreply.github.com",
-          "href": "mailto:37882827+maxalzamora@users.noreply.github.com",
+          "value": "maxalzamorawork@gmail.com",
+          "href": "mailto:maxalzamorawork@gmail.com",
           "icon": "email"
         },
         {
@@ -908,6 +908,12 @@ window.PORTFOLIO_LANGUAGES = {
           "value": "github.com/maxalzamora",
           "href": "https://github.com/maxalzamora",
           "icon": "github"
+        },
+        {
+          "label": "Linkedin",
+          "value": "linkedin.com/in/maxalzamora",
+          "href": "https://www.linkedin.com/in/maxalzamora/",
+          "icon": "linkedin"
         }
       ]
     },
@@ -928,7 +934,7 @@ window.PORTFOLIO_LANGUAGES = {
       "profileSummary": "Resum del perfil",
       "coreStack": "Stack principal",
       "scrollToExplore": "Desplaça't per explorar",
-      "liveSite": "Veure lloc",
+      "liveSite": "Veure web",
       "private": "Privat",
       "project": "projecte",
       "projects": "projectes",
