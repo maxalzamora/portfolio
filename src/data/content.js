@@ -384,9 +384,9 @@ window.PORTFOLIO_LANGUAGES = {
       "kicker": "01 — Sobre mí",
       "title": "Uniendo diseño, datos y código.",
       "paragraphs": [
-        "Estudié <strong>música</strong> y <strong>diseño gráfico</strong>, y pasé más de 10 años trabajando como diseñador gráfico, sobre todo como freelance. Por el camino, me interesé por el <strong>desarrollo web</strong> y acabé empezando a <strong>programar videojuegos</strong> como desarrollador autodidacta.",
-        "Más recientemente, he explorado el <strong>testing de software</strong> y el <strong>análisis de datos</strong> antes de descubrir que el <strong>desarrollo backend</strong> era en lo que quería centrarme. He completado una formación backend en Java y Spring, cubriendo APIs REST, bases de datos, Git y testing automatizado.",
-        "Ahora busco crecer como desarrollador backend, contribuir a proyectos reales y aportar mi creatividad, mi capacidad de resolución de problemas y mi experiencia profesional al desarrollo de software."
+        "Estudié <strong>música</strong> y <strong>diseño gráfico</strong>, y pasé más de 10 años trabajando como diseñador gráfico, sobre todo como freelance. Por el camino, me interesé por el <strong>desarrollo web</strong> y acabé <strong>programando videojuegos</strong> como desarrollador autodidacta.",
+        "En los últimos años he explorado el <strong>testing de software</strong> y el <strong>análisis de datos</strong> antes de descubrir que el <strong>desarrollo backend</strong> era en lo que quería centrarme. Más recientemente, he completado una formación backend en Java y Spring, cubriendo APIs REST, bases de datos, Git y testing automatizado.",
+        "Ahora busco crecer como <strong>desarrollador backend</strong>, contribuir a proyectos reales y aportar mi creatividad, mi capacidad de resolución de problemas y mi experiencia profesional al desarrollo de software."
       ],
       "principles": [
         {
@@ -399,7 +399,7 @@ window.PORTFOLIO_LANGUAGES = {
         },
         {
           "title": "Aprendizaje autónomo",
-          "text": "Cómodo explorando nuevas tecnologías, investigando soluciones y aprendiendo construyendo."
+          "text": "Cómodo explorando nuevas tecnologías, investigando soluciones y aprendiendo al construir."
         }
       ],
       "now": {
@@ -444,7 +444,7 @@ window.PORTFOLIO_LANGUAGES = {
           ]
         },
         {
-          "title": "Datos y analítica",
+          "title": "Data Analytics",
           "items": [
             "Pandas",
             "Power BI",
@@ -485,7 +485,7 @@ window.PORTFOLIO_LANGUAGES = {
     },
     "projects": {
       "kicker": "03 — Proyectos",
-      "title": "Proyectos elegidos.",
+      "title": "Proyectos seleccionados.",
       "note": "Tres proyectos que muestran cómo pienso, construyo y pruebo.",
       "categories": [
         {
@@ -715,8 +715,8 @@ window.PORTFOLIO_LANGUAGES = {
       "kicker": "01 — Sobre mi",
       "title": "Unint disseny, dades i codi.",
       "paragraphs": [
-        "Vaig estudiar <strong>música</strong> i <strong>disseny gràfic</strong>, i vaig passar més de 10 anys treballant com a dissenyador gràfic, sobretot com a freelance. Pel camí, em vaig interessar pel <strong>desenvolupament web</strong> i vaig acabar començant a <strong>programar videojocs</strong> com a desenvolupador autodidacte.",
-        "Més recentment, he explorat el <strong>testing de software</strong> i l'<strong>anàlisi de dades</strong> abans de descobrir que el <strong>desenvolupament backend</strong> era en el que volia centrar-me. He completat una formació backend en Java i Spring, cobrint APIs REST, bases de dades, Git i testing automatitzat.",
+        "Vaig estudiar <strong>música</strong> i <strong>disseny gràfic</strong>, i vaig passar més de 10 anys treballant com a dissenyador gràfic, sobretot com a freelance. Pel camí, em vaig interessar pel <strong>desenvolupament web</strong> i vaig acabar <strong>programant videojocs</strong> com a desenvolupador autodidacte.",
+        "Els últims anys he explorat el <strong>testing de software</strong> i l'<strong>anàlisi de dades</strong> abans de descobrir que el <strong>desenvolupament backend</strong> era en el que volia centrar-me. Més recentment, he completat una formació backend en Java i Spring, cobrint APIs REST, bases de dades, Git i testing automatitzat.",
         "Ara busco créixer com a desenvolupador backend, contribuir a projectes reals i aportar la meva creativitat, la meva capacitat de resolució de problemes i la meva experiència professional al desenvolupament de programari."
       ],
       "principles": [
@@ -730,7 +730,7 @@ window.PORTFOLIO_LANGUAGES = {
         },
         {
           "title": "Aprenentatge autònom",
-          "text": "Còmode explorant noves tecnologies, investigant solucions i aprenent construint."
+          "text": "Còmode explorant noves tecnologies, investigant solucions i aprenent al construir."
         }
       ],
       "now": {
@@ -775,7 +775,7 @@ window.PORTFOLIO_LANGUAGES = {
           ]
         },
         {
-          "title": "Dades i analítica",
+          "title": "Data Analysis",
           "items": [
             "Pandas",
             "Power BI",
@@ -816,7 +816,7 @@ window.PORTFOLIO_LANGUAGES = {
     },
     "projects": {
       "kicker": "03 — Projectes",
-      "title": "Projectes escollits.",
+      "title": "Projectes seleccionats.",
       "note": "Tres projectes que mostren com penso, construeixo i provo.",
       "categories": [
         {
