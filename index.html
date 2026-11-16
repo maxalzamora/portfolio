@@ -21,7 +21,7 @@
     <meta name="twitter:image" content="https://maxalzamora.github.io/portfolio/src/assets/projects/portfolio.webp">
     <link rel="canonical" href="https://maxalzamora.github.io/portfolio/">
     <title>Max Alzamora — Junior Backend Developer</title>
-    <link rel="icon" href="src/assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="src/assets/favicon.svg?v=2" type="image/svg+xml">
     <link rel="stylesheet" href="src/styles/main.css">
     <script>
         (function () {
@@ -69,13 +69,19 @@
             <nav class="site-nav" id="siteNav" aria-label="Main navigation"></nav>
 
             <div class="header-actions">
-                <div class="language-picker">
-                    <label class="language-label" for="languageSelect" id="languageLabel">Language</label>
-                    <select id="languageSelect">
-                        <option value="en" lang="en">EN</option>
-                        <option value="es" lang="es">ES</option>
-                        <option value="ca" lang="ca">CAT</option>
-                    </select>
+                <div class="language-picker" id="languagePicker">
+                    <span class="language-label" id="languageLabel">Language</span>
+                    <button class="language-trigger" id="languageTrigger" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageMenu" aria-labelledby="languageLabel languageCurrent">
+                        <span class="language-current" id="languageCurrent">EN</span>
+                        <svg class="language-chevron" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div class="language-menu" id="languageMenu" role="listbox" aria-labelledby="languageLabel" hidden>
+                        <button class="language-option" type="button" role="option" data-language="en" lang="en" aria-label="English" aria-selected="true" tabindex="-1">EN</button>
+                        <button class="language-option" type="button" role="option" data-language="es" lang="es" aria-label="Español" aria-selected="false" tabindex="-1">ES</button>
+                        <button class="language-option" type="button" role="option" data-language="ca" lang="ca" aria-label="Català" aria-selected="false" tabindex="-1">CAT</button>
+                    </div>
                 </div>
 
                 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">

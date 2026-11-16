@@ -144,10 +144,10 @@ window.PORTFOLIO = {
         projects: [
           {
             name: "SongTrove",
-            type: "Django application",
+            type: "Flask application",
             year: "2026",
             description:
-              "A Django web application born out of the need for a centralized, clutter-free songbook with exactly the features I wanted. It includes user accounts, personal libraries, song management, search and filters, on-the-fly chord transposition, capo calculations and a clean print view.",
+              "A Flask web application born out of the need for a centralized, clutter-free songbook with exactly the features I wanted. It uses a local SQLite database and includes user accounts, personal libraries, song management, search and filters, on-the-fly chord transposition, capo calculations and a clean print view.",
             image: "src/assets/projects/songtrove.webp",
             imageAlt: "SongTrove — chord sheet library in dark mode",
             repo: "https://github.com/maxalzamora/songtrove",
@@ -157,8 +157,9 @@ window.PORTFOLIO = {
             statsRepo: "maxalzamora/songtrove",
             tech: [
               "Python",
-              "Django",
-              "MySQL"
+              "Flask",
+              "SQLite",
+              "Flask-WTF"
             ]
           },
           {
@@ -493,9 +494,9 @@ window.PORTFOLIO_LANGUAGES = {
           "projects": [
             {
               "name": "SongTrove",
-              "type": "Aplicación Django",
+              "type": "Aplicación Flask",
               "year": "2026",
-              "description": "Una aplicación web en Django que nació de la necesidad de tener un cancionero centralizado, con exactamente las funciones que quería. Incluye cuentas de usuario, bibliotecas personales, gestión de canciones, búsqueda y filtros, transposición de acordes al vuelo, cálculo de cejilla y una vista de impresión limpia.",
+              "description": "Una aplicación web en Flask que nació de la necesidad de tener un cancionero centralizado, con exactamente las funciones que quería. Usa una base de datos SQLite local e incluye cuentas de usuario, bibliotecas personales, gestión de canciones, búsqueda y filtros, transposición de acordes al vuelo, cálculo de cejilla y una vista de impresión limpia.",
               "image": "src/assets/projects/songtrove.webp",
               "imageAlt": "SongTrove — biblioteca de hojas de acordes en modo oscuro",
               "repo": "https://github.com/maxalzamora/songtrove",
@@ -505,8 +506,9 @@ window.PORTFOLIO_LANGUAGES = {
               "statsRepo": "maxalzamora/songtrove",
               "tech": [
                 "Python",
-                "Django",
-                "MySQL"
+                "Flask",
+                "SQLite",
+                "Flask-WTF"
               ]
             },
             {
@@ -824,9 +826,9 @@ window.PORTFOLIO_LANGUAGES = {
           "projects": [
             {
               "name": "SongTrove",
-              "type": "Aplicació Django",
+              "type": "Aplicació Flask",
               "year": "2026",
-              "description": "Una aplicació web en Django que va néixer de la necessitat de tenir un cançoner centralitzat, amb exactament les funcions que volia. Inclou comptes d'usuari, biblioteques personals, gestió de cançons, cerca i filtres, transposició d'acords al vol, càlcul del capo i una vista d'impressió neta.",
+              "description": "Una aplicació web en Flask que va néixer de la necessitat de tenir un cançoner centralitzat, amb exactament les funcions que volia. Utilitza una base de dades SQLite local i inclou comptes d'usuari, biblioteques personals, gestió de cançons, cerca i filtres, transposició d'acords al vol, càlcul del capo i una vista d'impressió neta.",
               "image": "src/assets/projects/songtrove.webp",
               "imageAlt": "SongTrove — biblioteca de fulls d'acords en mode fosc",
               "repo": "https://github.com/maxalzamora/songtrove",
@@ -836,8 +838,9 @@ window.PORTFOLIO_LANGUAGES = {
               "statsRepo": "maxalzamora/songtrove",
               "tech": [
                 "Python",
-                "Django",
-                "MySQL"
+                "Flask",
+                "SQLite",
+                "Flask-WTF"
               ]
             },
             {

@@ -34,9 +34,9 @@ That combination — a creative background, a technical mindset and professional
 ## Selected projects
 
 ### [SongTrove](https://songtrove.pythonanywhere.com/)
-A Django songbook app built out of the need for a central, clutter-free place for songs and chords. It includes user accounts, personal libraries, search and filters, on-the-fly chord transposition, capo calculations and a print-friendly view.
+A Flask songbook app with a local SQLite database, built out of the need for a central, clutter-free place for songs and chords. It includes user accounts, personal libraries, search and filters, on-the-fly chord transposition, capo calculations and a print-friendly view.
 
-`Python` `Django` `MySQL` · [Code](https://github.com/maxalzamora/songtrove)
+`Python` `Flask` `SQLite` `Flask-WTF` · [Code](https://github.com/maxalzamora/songtrove)
 
 ### [Cyanofy](https://github.com/maxalzamora/cyanotype-maker)
 A Spring Boot app that turns a photograph into the digital negative for cyanotype contact printing. Built for my partner's cyanotype workshops, it handles density-based tone mapping, 16-bit TIFF and page-sized PDF exports, print previews and calibration from a photographed print — without relying on paywalled tools.

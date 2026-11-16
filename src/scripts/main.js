@@ -6,6 +6,7 @@
     const I18N = window.PORTFOLIO_LANGUAGES || { en: window.PORTFOLIO };
     const DEFAULT_LANGUAGE = 'en';
     const LANGUAGE_STORAGE = 'portfolio-language';
+    const LANGUAGE_LABELS = { en: 'EN', es: 'ES', ca: 'CAT' };
     const hasLanguage = (language) => Object.prototype.hasOwnProperty.call(I18N, language);
 
     function getStoredLanguage() {
@@ -180,6 +181,19 @@
         fetchGitHubStats();
     }
 
+    function syncLanguagePicker() {
+        const current = $('#languageCurrent');
+        const menu = $('#languageMenu');
+        if (current) current.textContent = LANGUAGE_LABELS[currentLanguage] || currentLanguage.toUpperCase();
+        if (!menu) return;
+
+        $$('.language-option', menu).forEach((option) => {
+            const active = option.getAttribute('data-language') === currentLanguage;
+            option.setAttribute('aria-selected', active ? 'true' : 'false');
+            option.tabIndex = -1;
+        });
+    }
+
     function setLanguage(language, options = {}) {
         const { persist = true } = options;
         const next = hasLanguage(language) ? language : DEFAULT_LANGUAGE;
@@ -189,18 +203,118 @@
         root.lang = next;
         if (persist) writeStorage(LANGUAGE_STORAGE, next);
 
-        const select = $('#languageSelect');
-        if (select) select.value = next;
-
         renderAll();
+        syncLanguagePicker();
     }
 
     function initLanguage() {
-        const select = $('#languageSelect');
-        if (!select) return;
+        const picker = $('#languagePicker');
+        const trigger = $('#languageTrigger');
+        const menu = $('#languageMenu');
+        if (!picker || !trigger || !menu) return;
 
-        select.value = currentLanguage;
-        select.addEventListener('change', () => setLanguage(select.value));
+        const options = $$('.language-option', menu);
+        if (!options.length) return;
+
+        const setOptionTabIndexes = (activeIndex) => {
+            options.forEach((option, index) => {
+                option.tabIndex = index === activeIndex ? 0 : -1;
+            });
+        };
+
+        const openMenu = () => {
+            if (!menu.hidden) return;
+            menu.hidden = false;
+            picker.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+
+            const selectedIndex = options.findIndex((option) => option.getAttribute('aria-selected') === 'true');
+            const focusIndex = selectedIndex >= 0 ? selectedIndex : 0;
+            setOptionTabIndexes(focusIndex);
+            options[focusIndex].focus();
+        };
+
+        const closeMenu = ({ returnFocus = false } = {}) => {
+            if (menu.hidden) return;
+            menu.hidden = true;
+            picker.classList.remove('is-open');
+            trigger.setAttribute('aria-expanded', 'false');
+            options.forEach((option) => {
+                option.tabIndex = -1;
+            });
+            if (returnFocus) trigger.focus();
+        };
+
+        const selectLanguage = (option) => {
+            const language = option.getAttribute('data-language');
+            closeMenu({ returnFocus: true });
+            if (language && language !== currentLanguage) {
+                setLanguage(language);
+            } else {
+                syncLanguagePicker();
+            }
+        };
+
+        trigger.addEventListener('click', () => {
+            if (menu.hidden) {
+                openMenu();
+            } else {
+                closeMenu({ returnFocus: true });
+            }
+        });
+
+        trigger.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+                event.preventDefault();
+                openMenu();
+            } else if (event.key === 'Escape') {
+                closeMenu({ returnFocus: true });
+            }
+        });
+
+        options.forEach((option) => {
+            option.addEventListener('click', () => selectLanguage(option));
+            option.addEventListener('keydown', (event) => {
+                const index = options.indexOf(option);
+                let nextIndex = null;
+
+                if (event.key === 'ArrowDown') {
+                    nextIndex = (index + 1) % options.length;
+                } else if (event.key === 'ArrowUp') {
+                    nextIndex = (index - 1 + options.length) % options.length;
+                } else if (event.key === 'Home') {
+                    nextIndex = 0;
+                } else if (event.key === 'End') {
+                    nextIndex = options.length - 1;
+                } else if (event.key === 'Escape') {
+                    event.preventDefault();
+                    closeMenu({ returnFocus: true });
+                    return;
+                } else if (event.key === 'Tab') {
+                    closeMenu();
+                    return;
+                }
+
+                if (nextIndex === null) return;
+                event.preventDefault();
+                setOptionTabIndexes(nextIndex);
+                options[nextIndex].focus();
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!picker.contains(event.target)) closeMenu();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !menu.hidden) closeMenu({ returnFocus: true });
+        });
+
+        picker.addEventListener('focusout', (event) => {
+            if (!picker.contains(event.relatedTarget)) closeMenu();
+        });
+
+        syncLanguagePicker();
     }
 
     function renderHeader() {
